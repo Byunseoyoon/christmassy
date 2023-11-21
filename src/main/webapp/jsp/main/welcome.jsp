@@ -6,7 +6,7 @@
 <title>Welcome</title>
 </head>
 <body>
-	<%@ include file="menu.jsp" %>
+	<jsp:include page="../frame/menu.jsp" />
 	<%! String greeting = "Welcome to Web Shopping Mall";
 	String tagline = "Welcome to Web Market!"; %>
 	<div class = "jumbotron">
@@ -40,6 +40,6 @@
 		</div>
 		<hr>
 	</div>
-	<%@ include file="footer.jsp" %>
+	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
