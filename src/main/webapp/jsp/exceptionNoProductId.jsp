@@ -5,7 +5,7 @@
 <title>상품 아이디 오류</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />	
+	<jsp:include page="frame/menu.jsp" />	
 	<div class="jumbotron">
 		<div class="container">
 			<h2 class="alert alert-danger">해당 상품이 존재하지 않습니다.</h2>
