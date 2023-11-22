@@ -12,9 +12,17 @@
   .FAQ {
     	background-color: white;
     	border: none;
-    	padding: 100px;
+    	padding: 50px;
     	max-width: 1000px;
     	margin:0 auto;
+	}
+	.QAA {
+    	background-color: white;
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	margin-bottom: 50px;
 	}
 </style>
 </head>
@@ -26,7 +34,7 @@
 		</div>
 	</div>
 	<div class="FAQ">
-		<h4>FAQ</h4>
+		<h3>FAQ</h3>
 		<details>
 			<summary>Q. 배송은 언제 되나요?</summary>
 			영업일 기준 오후 1시 이전 결제 완료 주문건 :  당일 출고됩니다. (일부 상품 제외)<br>
@@ -47,9 +55,12 @@
 			<p>교환으로 인한 차액 발생시 구매하신 쇼핑몰로 문의주시면 도와드리겠습니다.
 		</details>
 	</div>
+	<div class="QAA">
+		<a href="question.jsp"><h3>Q&A</h3></a>
+	</div>
 	<footer class="container">
 		<p><a href="terms.jsp">이용 약관</a></p>
 	</footer>
 	<jsp:include page="../frame/footer.jsp" />
 </body>
-</html>
+</html> 
