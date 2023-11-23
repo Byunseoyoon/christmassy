@@ -1,4 +1,4 @@
-<!--<%@ page contentType="text/html; charset=utf-8" %>
+<!--
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
@@ -88,7 +88,7 @@
 	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html> -->
-<!--<%@ page contentType="text/html; charset=utf-8" %>
+<!--
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
