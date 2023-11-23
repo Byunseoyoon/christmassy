@@ -265,11 +265,16 @@
       // 결과 처리
       while (rs.next()) {
 %>
-        <tr>
+       <!-- <tr>
           <td class="center"><%= rs.getString("hidx") %></td>
           <td class="left"><%= rs.getString("title") %></td>
           <td class="center"><%= rs.getString("content_date") %></td>
-        </tr>
+        </tr> -->
+        <tr>
+  			<td class="center"><%= rs.getString("hidx") %></td>
+  			<td class="left"><a href="viewQuestion.jsp?hidx=<%= rs.getString("hidx") %>"><%= rs.getString("title") %></a></td>
+  			<td class="center"><%= rs.getString("content_date") %></td>
+		</tr>
 <%
       }
    } catch (Exception e) {
