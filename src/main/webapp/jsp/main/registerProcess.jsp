@@ -21,7 +21,7 @@
 
 	
 	try{
-		String sql = "INSERT INTO members(midx, id, pw, name, phone, address, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO members(midx, id, pw, name, phone, address, mdate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		// pstmt 생성
 		pstmt = conn.prepareStatement(sql);
