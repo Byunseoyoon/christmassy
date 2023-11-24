@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        .bg-dark {
-            background-color: #F4EEEE !important; /* 상단바 배경색 */
+        .navbar {
+            background-color: #343a40; /* 상단바 배경색 */
         }
         .navbar-brand {
             color: white; /* 상단바 로고 글자색 */
@@ -34,7 +35,7 @@
                         <a class="nav-link" href="#">마이페이지</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">고객센터</a>
+                        <a class="nav-link" href="../customerservice/serviceMain.jsp">고객센터</a>
                     </li>
                 </ul>
             </div>
@@ -42,3 +43,4 @@
     </nav>
 </body>
 </html>
+
