@@ -175,6 +175,8 @@
 </body>
 </html> -->
 <%@ page contentType="text/html; charset=utf-8" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
@@ -237,7 +239,6 @@
       <th>제목</th>
       <th>일시</th>
     </tr>
-<%@ page import="java.sql.*" %>
 <%
    Connection conn = null;
    Statement stmt = null;
@@ -254,28 +255,40 @@
 
       // 데이터베이스 연결
       conn = DriverManager.getConnection(url, user, password);
-
-      // SQL 쿼리 (MySQL 쿼리)
-      String sql = "SELECT hidx, title, content_date FROM help WHERE midx = 'E1'";
       
-      // 쿼리 실행
-      stmt = conn.createStatement();
-      rs = stmt.executeQuery(sql);
+      // 세션에서 userId 가져오기
+      session = request.getSession();
+      String loggedInUserId = (String) session.getAttribute("userId");
 
-      // 결과 처리
-      while (rs.next()) {
+      // SQL 쿼리: userId를 기반으로 midx를 조회
+      String midxQuery = "SELECT midx FROM members WHERE id = ?";
+      try (PreparedStatement pstmt = conn.prepareStatement(midxQuery)) {
+          pstmt.setString(1, loggedInUserId);
+          ResultSet midxResult = pstmt.executeQuery();
+
+          String midx_result = null;
+
+          if (midxResult.next()) {
+              midx_result = midxResult.getString("midx");
+          }
+
+          // SQL 쿼리: midx를 이용하여 Q&A 목록 조회
+          String sql = "SELECT hidx, title, content_date FROM help WHERE midx = ?";
+          try (PreparedStatement pstmtQnA = conn.prepareStatement(sql)) {
+              pstmtQnA.setString(1, midx_result);
+              ResultSet rsQnA = pstmtQnA.executeQuery();
+
+              // 결과 처리
+              while (rsQnA.next()) {
 %>
-       <!-- <tr>
-          <td class="center"><%= rs.getString("hidx") %></td>
-          <td class="left"><%= rs.getString("title") %></td>
-          <td class="center"><%= rs.getString("content_date") %></td>
-        </tr> -->
-        <tr>
-  			<td class="center"><%= rs.getString("hidx") %></td>
-  			<td class="left"><a href="viewQuestion.jsp?hidx=<%= rs.getString("hidx") %>"><%= rs.getString("title") %></a></td>
-  			<td class="center"><%= rs.getString("content_date") %></td>
+                <tr>
+  			<td class="center"><%= rsQnA.getString("hidx") %></td>
+  			<td class="left"><a href="viewQuestion.jsp?hidx=<%= rsQnA.getString("hidx") %>"><%= rsQnA.getString("title") %></a></td>
+  			<td class="center"><%= rsQnA.getString("content_date") %></td>
 		</tr>
 <%
+              }
+          }
       }
    } catch (Exception e) {
       e.printStackTrace();

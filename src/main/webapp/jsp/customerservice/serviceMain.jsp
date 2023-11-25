@@ -17,6 +17,17 @@
     	margin:0 auto;
 	}
 	.QAA {
+		color: inherit;
+    	text-decoration: none;
+    	background-color: white;
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+	}
+	.term {
+		color: inherit;
+    	text-decoration: none;
     	background-color: white;
     	border: none;
     	padding: 50px;
@@ -58,9 +69,9 @@
 	<div class="QAA">
 		<a href="question.jsp"><h3>Q&A</h3></a>
 	</div>
-	<footer class="container">
-		<p><a href="terms.jsp">이용 약관</a></p>
-	</footer>
+	<div class="term">
+		<a href="terms.jsp"><h3>이용 약관</h3></a>
+	</div>
 	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html> 
