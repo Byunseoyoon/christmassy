@@ -18,6 +18,10 @@
         .navbar-nav .nav-item {
         	margin: 0 30px; /* 왼쪽과 오른쪽 여백을 설정할 값 */
     	}
+    	a {
+    		color: black;
+    		text-decoration: none;
+  		}
     </style>
 </head>
 <body>
