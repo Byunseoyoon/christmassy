@@ -9,7 +9,7 @@
 </head>
 <body>
   <jsp:include page="../frame/menu.jsp" />
-
+  <%int num = 0; %>
   <div class="container mt-5">
     <%
       Connection conn = null;
@@ -34,8 +34,8 @@
         String loggedInUserId = (String) session.getAttribute("userId");
         
      // SQL 쿼리 (MySQL 쿼리)
-        String qParam = request.getParameter("q_num");
-     	int num = Integer.parseInt(qParam);
+        String qParam = request.getParameter("help.q_num");
+     	num = Integer.parseInt(qParam);
         String sql = "SELECT * FROM help WHERE q_num = ?";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, num);
@@ -60,7 +60,6 @@
               <p><strong>사진:</strong></p>
               <img src="<%= "C:\\upload\\" + file %>" alt="사진">
             <% } %>
-            <p><strong>답변여부:</strong> <%= confirmed %></p>
             <% if (answer != null) { %>
               <p><strong>답변:</strong></p>
               <%= answer %>
@@ -83,7 +82,16 @@
       }
     %>
   </div>
-
+  <div class="container mt-5">
+  <form action="saveAnswer.jsp" method="post">
+    <div class="form-group">
+      <label for="q_answer">답변:</label>
+      <textarea class="form-control" id="q_answer" name="q_answer" rows="4" required></textarea>
+    </div>
+    <input type="hidden" name="q_num" value="<%= num %>">
+	<button type="submit" class="btn btn-primary">답변 작성</button>
+  </form>
+	</div>
   <jsp:include page="../frame/footer.jsp" />
 </body>
 </html>

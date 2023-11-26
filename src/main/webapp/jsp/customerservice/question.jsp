@@ -273,7 +273,7 @@
           }
 
           // SQL 쿼리: midx를 이용하여 Q&A 목록 조회
-          String sql = "SELECT hidx, title, content_date FROM help WHERE midx = ?";
+          String sql = "SELECT q_num, hidx, title, content_date FROM help WHERE midx = ?";
           try (PreparedStatement pstmtQnA = conn.prepareStatement(sql)) {
               pstmtQnA.setString(1, midx_result);
               ResultSet rsQnA = pstmtQnA.executeQuery();
@@ -283,7 +283,7 @@
 %>
                 <tr>
   			<td class="center"><%= rsQnA.getString("hidx") %></td>
-  			<td class="left"><a href="viewQuestion.jsp?hidx=<%= rsQnA.getString("hidx") %>"><%= rsQnA.getString("title") %></a></td>
+  			<td class="left"><a href="viewQuestion.jsp?q_num=<%= rsQnA.getInt("q_num") %>"><%= rsQnA.getString("title") %></a></td>
   			<td class="center"><%= rsQnA.getString("content_date") %></td>
 		</tr>
 <%
