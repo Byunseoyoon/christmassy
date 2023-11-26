@@ -35,6 +35,16 @@
     	margin:0 auto;
     	margin-bottom: 50px;
 	}
+	.adminQuestion {
+		color: inherit;
+    	text-decoration: none;
+    	background-color: white;
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	margin-bottom: 50px;
+	}
 </style>
 </head>
 <body>
@@ -71,6 +81,9 @@
 	</div>
 	<div class="term">
 		<a href="terms.jsp"><h3>이용 약관</h3></a>
+	</div>
+	<div class="adminQuestion">
+		<a href="adminQuestion.jsp"><h3>관리자 기능 임시 페이지</h3></a>
 	</div>
 	<jsp:include page="../frame/footer.jsp" />
 </body>
