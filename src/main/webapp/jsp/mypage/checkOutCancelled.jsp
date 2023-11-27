@@ -1,11 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
-<title>주문 취소</title>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="frame/menu.jsp" />
+	<jsp:include page="../frame/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">주문 취소</h1>
