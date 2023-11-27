@@ -1,0 +1,37 @@
+:root {
+	--main-box-height: 90vh;
+}
+div{ 
+	color: #194F35;
+}
+.mypage-container{
+  	border-style: solid;
+  	border-width : 1.5px;
+  	border-color: #194F35;
+  	border-radius: 5px;
+  	width: var(--main-box-width);		  
+	margin-top: calc((100vh - var(--main-box-height)) / 2);    /* 사이드바 위와 아래의 마진을 동일하게 지정 */
+  	margin-left : 260px;
+  	margin-right : 40px;
+  	padding: 50px;
+}
+  
+.box{
+  border-bottom-width : 1px;
+  border-bottom-style: solid;
+  margin: 20px;
+}
+.box-item{
+  margin-left:35%;
+}
+.item{
+  display: inline-block;
+  margin-left:5%;
+}
+   
+.box-title{
+  font-size: 1rem;
+  text-align: center;
+  font-weight:bold;
+}
+  
