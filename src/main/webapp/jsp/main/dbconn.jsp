@@ -11,4 +11,5 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, user, password);
 	
+	application.setAttribute("dbConnection", conn);
 %>
