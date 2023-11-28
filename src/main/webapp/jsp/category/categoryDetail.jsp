@@ -1,20 +1,22 @@
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="java.io.*,java.util.*" %>
-<%@ page import="javax.servlet.*,javax.servlet.http.*" %>
-<%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+
+<%@ include file="connect.jsp" %>
 
 <%
 String categoryDetail = request.getParameter("categoryDetail");
 %>
 
-
-
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <title><%=categoryDetail %></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="categoryDetail.css"> <!-- Include the CSS file -->
+<script type="text/javascript" src="categoryDetail.js"></script> <!-- Include the JavaScript file -->
+<title><%=categoryDetail %></title>
+    
 </head>
 <body>
 
@@ -23,73 +25,60 @@ String categoryDetail = request.getParameter("categoryDetail");
         <div class="container">
             <h1 class="display-3"><%=categoryDetail%></h1>
         </div>
-    
+
         <div id="mainContent">
-        <jsp:include page="category.jsp" />
-         </div>
-        
+            <jsp:include page="category.jsp" />
+        </div>
     </div>
-    
-    
+
     <%
-    
-    
         Connection connection = null;
-    
-    
-        Statement statement = null;
+        PreparedStatement pstmt = null;
         ResultSet resultSet = null;
 
         try {
-            // JDBC 드라이버 로딩
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // 데이터베이스 연결
-            String url = "jdbc:mysql://localhost:3306/christmassyDB?serverTimezone=UTC";
-            String username = "root";
-            String password = "gyuri127";
-            connection = DriverManager.getConnection(url, username, password);
+            connection = getConnection();
 
             // SQL 쿼리 동적 
-            String query = "SELECT pidx, pname, price, descriptor , image FROM products WHERE categoryDetail = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
+            String query = "SELECT pidx, pname, price, descriptor, image FROM products WHERE categoryDetail = ?";
+            pstmt = connection.prepareStatement(query);
             pstmt.setString(1,categoryDetail);
-           // statement = connection.createStatement();
-           System.out.println("실행된 쿼리: " + pstmt.toString());
+            System.out.println("실행된 쿼리: " + pstmt.toString());
             resultSet = pstmt.executeQuery();
+    %>
 
-            // 상품 목록 출력
-            while (resultSet.next()) {
-            	int pidx = resultSet.getInt("pidx");
-                String pname = resultSet.getString("pname");
-                int price = resultSet.getInt("price");
-                String descriptor = resultSet.getString("descriptor");
-                String image = resultSet.getString("image");
-                
-                
-                //System.out.println("pname: " + pname + ", price: " + price + ", descriptor: " + descriptor);
+    <div class="container">
+        <div class="row">
+            <%
+                while (resultSet.next()) {
+                    int pidx = resultSet.getInt("pidx");
+                    String pname = resultSet.getString("pname");
+                    int price = resultSet.getInt("price");
+                    String descriptor = resultSet.getString("descriptor");
+                    String image = resultSet.getString("image");
             %>
 
-            <div class="col-md-4">
-            
-            <img src="image%>" style="width: 100%"; height: 100% />
+            <div class="product-container" onclick="redirectToProductDetail('<%=pidx%>')">
+                <img src="../../resources/images/<%=image%>" style="width: 100%;  height: 200px" />
                 <h3><%=pname%></h3>
                 <p>가격: <%=price%>원</p>
                 <p>설명: <%=descriptor%></p>
-                <!-- 추가 필요한 내용 -->
+                
             </div>
 
             <%
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                // 리소스 해제
+                if (resultSet != null) resultSet.close();
+                if (pstmt != null) pstmt.close();
+                if (connection != null) connection.close();
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // 리소스 해제
-            if (resultSet != null) resultSet.close();
-            if (statement != null) statement.close();
-            if (connection != null) connection.close();
-        }
-    %>
+            %>
+        </div>
+    </div>
 
     <div class="container">
         <hr>
