@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 
 <html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<jsp:include page="../frame/header.jsp"></jsp:include>
 <style>
     .login-register-links {
         margin-right: 30px;

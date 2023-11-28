@@ -3,18 +3,11 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-<title>고객 센터</title>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 <style>
   a {
     color: black;
     text-decoration: none;
-  }
-  body {
-      background-image: url('bg.png');
-      background-size: 100% auto;
-      background-repeat: repeat-y;
-      min-height: 100vh;
   }
   .jumbo {
     	background-color: rgba(255, 255, 255, 0);
