@@ -16,6 +16,37 @@ String pidx = request.getParameter("pidx");
     <link rel="stylesheet" type="text/css" href="productDetail.css"> <!-- CSS 파일 포함 -->
     <script type="text/javascript" src="productDetail.js"></script> <!-- JavaScript 파일 포함 -->
     <title>제품 상세정보</title>
+    
+    
+  <style>
+        /* Add any additional styles for the layout */
+        .product-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .product-info img {
+            max-width: 100%;
+            max-height: 500px; /* Adjust the max-height as needed */
+            margin-right: 20px;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quantity-section button {
+            margin-left: 10px;
+        }
+    </style>   
+    
+    
+    
+    
 </head>
 <body>
 
@@ -50,44 +81,44 @@ String pidx = request.getParameter("pidx");
 
 
 
-<div class="col-md-6">
-    <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
-</div>
+            <!-- Product Information Section -->
+            <div class="col-md-12 product-info">
+                <div class="col-md-6">
+                    <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
+                </div>
 
-<div class="col-md-6">
-    <h3><%=pname%></h3>
-    <p>가격: <%=price%>원</p>
-    
-    <!-- Display the quantity and buttons horizontally -->
-    <div class="quantity-section" style="display: flex; align-items: center;">
-        <p style="margin-right: 10px;">수량: <span id="quantityDisplay"><%=quantity%></span></p> <!-- 수량 표시 -->
-        <!-- 수량 조절을 위한 -와 + 버튼 -->
-        <button onclick="updateQuantity('-')">-</button>
-        <button onclick="updateQuantity('+')">+</button>
-    </div>
-    
-    
-    
-   
+                <div class="col-md-6">
+                    <h3><%=pname%></h3>
+                    <p>가격: <%=price%>원</p>
 
-    <!-- 상세보기와 리뷰 버튼 -->
-    <button onclick="showDetailSection()">상세보기</button>
-    <button onclick="showReviewSection()">리뷰</button>
-</div>
+                    <!-- Display the quantity and buttons horizontally -->
+                    <div class="quantity-section">
+                        <p>수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span></p>
+                        <!-- Quantity adjustment buttons -->
+                        <button onclick="updateQuantity('-', <%=price%>)">-</button>
+                        <button onclick="updateQuantity('+', <%=price%>)">+</button>
+                    </div>
 
+                    <!-- Display the order amount -->
+                    <div class="order-amount-section">
+                        <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
+                    </div>
 
+                    <!-- Cart and Order buttons -->
+                    <button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
+                    <button onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+                </div>
+            </div>
 
             <!-- 상세보기 섹션 -->
             <div class="col-md-12 detail-section" id="detailSection">
                 <!-- 상세보기 내용 -->
-                <!-- 여기에 상세보기에 대한 내용을 추가하세요 -->
-                 <p>설명: <%=descriptor%></p>
+                <p>설명: <%=descriptor%></p>
             </div>
 
             <!-- 리뷰 섹션 -->
             <div class="col-md-12 review-section" id="reviewSection" style="display: none;">
                 <!-- 리뷰 내용 -->
-                <!-- 여기에 리뷰에 대한 내용을 추가하세요 -->
                 리뷰 내용이 여기에 표시됩니다.
             </div>
 
@@ -108,24 +139,57 @@ String pidx = request.getParameter("pidx");
     <jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
-
 <script>
-    // 수량을 업데이트하는 함수
-    function updateQuantity(operation) {
-        var quantityElement = document.getElementById("quantityDisplay");
-        var currentQuantity = parseInt(quantityElement.innerHTML);
 
-        // +나 - 버튼에 따라 수량 업데이트
-        if (operation === '+') {
-            currentQuantity++;
-        } else if (operation === '-' && currentQuantity > 1) {
-            currentQuantity--;
-        }
 
-        // 화면에 표시된 수량 업데이트
-        quantityElement.innerHTML = currentQuantity;
+//장바구니에 상품 추가하는 함수
+function addToCart(productId, productName, unitPrice) {
+    // 현재 수량 가져오기
+    var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
+    
+    // 장바구니에 추가된 상품 정보 출력
+    var message = productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.";
+    alert(message);
+}
+
+
+//주문 버튼 클릭 시 처리하는 함수
+function redirectToCheckout(productId) {
+    // 현재 수량 가져오기
+    var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
+    
+    // 주문 페이지로 이동하면서 상품 pidx와 수량 정보를 전달
+    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity;
+}
+
+
+
+//수량을 업데이트하고 주문금액을 업데이트하는 함수
+function updateQuantity(operation, unitPrice) {
+    var quantityElement = document.getElementById("quantityDisplay");
+    var currentQuantity = parseInt(quantityElement.getAttribute("data-quantity"));
+
+    // +나 - 버튼에 따라 수량 업데이트
+    if (operation === '+' && currentQuantity < 999) {
+        currentQuantity++;
+    } else if (operation === '-' && currentQuantity > 1) {
+        currentQuantity--;
     }
 
+    // 화면에 표시된 수량 및 데이터 속성 업데이트
+    quantityElement.innerHTML = currentQuantity;
+    quantityElement.setAttribute("data-quantity", currentQuantity);
+
+    // 주문금액 계산 및 화면에 표시된 주문금액 업데이트
+    var orderAmount = unitPrice * currentQuantity;
+    document.getElementById("orderAmount").innerHTML = orderAmount + "원";
+}
+
+
+   
+    
+    
+    
     function showDetailSection() {
         document.getElementById("detailSection").style.display = "block";
         document.getElementById("reviewSection").style.display = "none";

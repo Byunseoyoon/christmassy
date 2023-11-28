@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.InitialContext" %>
@@ -16,6 +17,37 @@ String pidx = request.getParameter("pidx");
     <link rel="stylesheet" type="text/css" href="productDetail.css"> <!-- CSS 파일 포함 -->
     <script type="text/javascript" src="productDetail.js"></script> <!-- JavaScript 파일 포함 -->
     <title>제품 상세정보</title>
+    
+    
+  <style>
+        /* Add any additional styles for the layout */
+        .product-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .product-info img {
+            max-width: 100%;
+            max-height: 500px; /* Adjust the max-height as needed */
+            margin-right: 20px;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quantity-section button {
+            margin-left: 10px;
+        }
+    </style>   
+    
+    
+    
+    
 </head>
 <body>
 
@@ -50,56 +82,61 @@ String pidx = request.getParameter("pidx");
 
 
 
-<div class="col-md-6">
-    <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
-</div>
+            <!-- Product Information Section -->
+            <div class="col-md-12 product-info">
+                <div class="col-md-6">
+                    <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
+                </div>
 
-<div class="col-md-6">
-    <h3><%=pname%></h3>
-    <p>가격: <%=price%>원</p>
-    
-    
-<!-- Display the quantity and buttons horizontally -->
-<div class="quantity-section" style="display: flex; align-items: center;">
-    <p style="margin-right: 10px;">수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span></p>
-    <!-- 수량 조절을 위한 -와 + 버튼 -->
-    <button onclick="updateQuantity('-', <%=price%>)">-</button>
-    <button onclick="updateQuantity('+', <%=price%>)">+</button>
-</div>
+                <div class="col-md-6">
+                    <h3><%=pname%></h3>
+                    <p>가격: <%=price%>원</p>
 
-<!-- Display the order amount -->
-<div class="order-amount-section">
-    <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
-</div>
+                    <!-- Display the quantity and buttons horizontally -->
+                    <div class="quantity-section">
+                        <p>수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span></p>
+                        <!-- Quantity adjustment buttons -->
+                        <button onclick="updateQuantity('-', <%=price%>)">-</button>
+                        <button onclick="updateQuantity('+', <%=price%>)">+</button>
+                    </div>
 
+                    <!-- Display the order amount -->
+                    <div class="order-amount-section">
+                        <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
+                    </div>
 
-<!-- 장바구니 버튼 -->
-<button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
-
-<!-- 주문 버튼 -->
-<button onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
- 
-    
-   
-
-    <!-- 상세보기와 리뷰 버튼 -->
+                    <!-- Cart and Order buttons -->
+                    <button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
+                    <button onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+                </div>
+            
+                  
+                
+            </div>
+            
+            <div class="col-md-12">
+             <!-- 상세보기와 리뷰 버튼 -->
     <button onclick="showDetailSection()">상세보기</button>
     <button onclick="showReviewSection()">리뷰</button>
-</div>
+            
+            
+            </div>
+
+
+
+
 
 
 
             <!-- 상세보기 섹션 -->
             <div class="col-md-12 detail-section" id="detailSection">
                 <!-- 상세보기 내용 -->
-                <!-- 여기에 상세보기에 대한 내용을 추가하세요 -->
-                 <p>설명: <%=descriptor%></p>
+                <p>설명: <%=descriptor%></p>
             </div>
 
             <!-- 리뷰 섹션 -->
             <div class="col-md-12 review-section" id="reviewSection" style="display: none;">
                 <!-- 리뷰 내용 -->
-                <!-- 여기에 리뷰에 대한 내용을 추가하세요 -->
                 리뷰 내용이 여기에 표시됩니다.
             </div>
 
@@ -181,4 +218,6 @@ function updateQuantity(operation, unitPrice) {
         document.getElementById("reviewSection").style.display = "block";
     }
 </script>
+
+
 
