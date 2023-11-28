@@ -17,6 +17,9 @@
 
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+    
+    PreparedStatement pstmt1 = null;
+    ResultSet rs1 = null;
 
     try {
         // SQL 쿼리
@@ -29,16 +32,30 @@
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            // 세션에 사용자 정보 저장
-            session.setAttribute("userId", id);
+        	//세션에 사용자 아이디 저장
+        	session.setAttribute("userId", id);
+        	
+        	String sql1 = "SELECT midx FROM members WHERE id=?";
+        	pstmt1 = conn.prepareStatement(sql1);
+        	pstmt1.setString(1, id);
+        	
+        	rs1 = pstmt.executeQuery();
+        	if(rs1.next()){
+	            // 세션에 사용자 번호 저장
+	            String midx = rs1.getString("midx");
+	            session.setAttribute("userMidx", midx);
+        	}
             
             // 로그인 성공 후의 페이지로 리다이렉트 또는 필요한 로직 추가
-            response.sendRedirect("homeLogin.jsp");
+            response.sendRedirect("home.jsp");
         } else {
             // 로그인 실패
-            out.println("아이디 또는 비밀번호가 잘못되었습니다.<br>");
-			  
-            response.sendRedirect("login.jsp");
+%>
+   <script type="text/javascript">
+       alert("아이디 또는 비밀번호가 잘못되었습니다.");
+       window.location.href = "login.jsp"; 
+   </script>
+<%
         }
     } catch (SQLException e) {
         e.printStackTrace();
