@@ -5,7 +5,7 @@
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <style>
   a {
-    color: black;
+    color: #115A5B;
     text-decoration: none;
   }
   .jumbo {
@@ -16,6 +16,7 @@
     	margin:0 auto;
     	text-align: center;
     	color: #115A5B;
+    	font-weight: bolder; 
 	}
   .FAQ {
     	background-color: rgba(255, 255, 255, 0);
@@ -23,6 +24,7 @@
     	padding: 50px;
     	max-width: 1000px;
     	margin:0 auto;
+    	color: #115A5B;
 	}
 	.QAA {
 		color: inherit;
@@ -34,16 +36,6 @@
     	margin:0 auto;
 	}
 	.term {
-		color: inherit;
-    	text-decoration: none;
-    	background-color: rgba(255, 255, 255, 0);
-    	border: none;
-    	padding: 50px;
-    	max-width: 1000px;
-    	margin:0 auto;
-    	margin-bottom: 50px;
-	}
-	.adminQuestion {
 		color: inherit;
     	text-decoration: none;
     	background-color: rgba(255, 255, 255, 0);
@@ -87,9 +79,6 @@
 	</div>
 	<div class="term">
 		<a href="terms.jsp"><h3>이용 약관</h3></a>
-	</div>
-	<div class="adminQuestion">
-		<a href="adminQuestion.jsp"><h3>관리자 기능 임시 페이지</h3></a>
 	</div>
 	<jsp:include page="../frame/footer.jsp" />
 </body>

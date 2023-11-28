@@ -71,15 +71,15 @@
 </style>
 </head>
 <body>
-  <jsp:include page="../frame/menu.jsp" />
+  <jsp:include page="../frame/adminMenu.jsp" />
   <div class="jumbo">
 		<h1>Q&A</h1>
-	</div>
+  </div>
   <br>
   <table>
     <tr>
-      <th class="center">번호</th>
-      <th  class="center">제목</th>
+      <th class="center">id</th>
+      <th class="center">제목</th>
       <th class="center">일시</th>
     </tr>
 <%
@@ -88,51 +88,34 @@
    ResultSet rs = null;
 
    try {
-      // JDBC 드라이버 로딩 (MySQL 드라이버)
-      Class.forName("com.mysql.cj.jdbc.Driver");
+	// JDBC 드라이버 로딩 (MySQL 드라이버)
+	   Class.forName("com.mysql.cj.jdbc.Driver");
 
-      // 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
-      String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
-      String user = "root";
-      String password = "1234";
+	     // 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
+	     String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
+	     String user = "root";
+	     String password = "1234";
 
-      // 데이터베이스 연결
-      conn = DriverManager.getConnection(url, user, password);
-      
-      // 세션에서 userId 가져오기
-      session = request.getSession();
-      String loggedInUserId = (String) session.getAttribute("userId");
+	     // 데이터베이스 연결
+	     conn = DriverManager.getConnection(url, user, password);
 
-      // SQL 쿼리: userId를 기반으로 midx를 조회
-      String midxQuery = "SELECT midx FROM members WHERE id = ?";
-      try (PreparedStatement pstmt = conn.prepareStatement(midxQuery)) {
-          pstmt.setString(1, loggedInUserId);
-          ResultSet midxResult = pstmt.executeQuery();
+	     String sql = "SELECT members.id, help.q_num, help.title, help.content_date " +
+                 "FROM members " +
+                 "JOIN help ON members.midx = help.midx " +
+                 "WHERE help.confirmed = 'no'";
+	     stmt = conn.createStatement();
+	     rs = stmt.executeQuery(sql);
 
-          String midx_result = null;
+	     while (rs.next()) {
 
-          if (midxResult.next()) {
-              midx_result = midxResult.getString("midx");
-          }
-
-          // SQL 쿼리: midx를 이용하여 Q&A 목록 조회
-          String sql = "SELECT q_num, hidx, title, content_date FROM help WHERE midx = ?";
-          try (PreparedStatement pstmtQnA = conn.prepareStatement(sql)) {
-              pstmtQnA.setString(1, midx_result);
-              ResultSet rsQnA = pstmtQnA.executeQuery();
-
-              // 결과 처리
-              while (rsQnA.next()) {
-%>
-                <tr>
-  			<td class="center"><%= rsQnA.getString("hidx") %></td>
-  			<td class="left"><a href="viewQuestion.jsp?q_num=<%= rsQnA.getInt("q_num") %>"><%= rsQnA.getString("title") %></a></td>
-  			<td class="center"><%= rsQnA.getString("content_date") %></td>
-		</tr>
-<%
-              }
-          }
-      }
+	   %>
+	   <tr>
+	   <td class="center"><%= rs.getString("members.id") %></td>
+	   <td class="left"><a href="writeAnswer.jsp?help.q_num=<%= rs.getInt("help.q_num") %>"><%= rs.getString("help.title") %></a></td>
+	   <td class="center"><%= rs.getString("help.content_date") %></td>
+	   </tr>
+	   <%
+	   }
    } catch (Exception e) {
       e.printStackTrace();
    } finally {
@@ -144,9 +127,6 @@
 %>
   </table>
   <br>
-  <span class="right">
-    <a href="writeQuestion.jsp"><input type="button" value="글쓰기" class="gradient"></a>
-  </span>
   <jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
