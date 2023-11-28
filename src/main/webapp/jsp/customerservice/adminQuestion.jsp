@@ -10,6 +10,21 @@
     color: black;
     text-decoration: none;
   }
+  body {
+      background-image: url('bg.png');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
+      min-height: 100vh;
+  }
+  .jumbo {
+    	background-color: rgba(255, 255, 255, 0);
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	text-align: center;
+    	color: #115A5B;
+	}
   table {
     width: 100%;
     border-top: 1px solid #d3d3d3;
@@ -32,6 +47,7 @@
     color: white;
     text-align: center;
     background: grey;
+    background-color: rgba(255, 255, 255, 0);
     border: solid 2px white;
     border-radius: 5px;
   }
@@ -42,6 +58,7 @@
     color: white;
     text-align: center;
     background: linear-gradient( to bottom, grey, black );
+    background-color: rgba(255, 255, 255, 0);
     border: solid 2px white;
     border-radius: 5px;
   }
@@ -51,10 +68,8 @@
 </head>
 <body>
   <jsp:include page="../frame/menu.jsp" />
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Q&A</h1>
-    </div>
+  <div class="jumbo">
+		<h1>Q&A</h1>
   </div>
   <br>
   <table>

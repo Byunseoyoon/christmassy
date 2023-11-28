@@ -4,8 +4,27 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <title>고객 센터</title>
 <style>
+	a {
+    color: black;
+    text-decoration: none;
+    }
+	body {
+      background-image: url('bg.png');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
+      min-height: 100vh;
+    }
+	.jumbo {
+    	background-color: rgba(255, 255, 255, 0);
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	text-align: center;
+    	color: #115A5B;
+	}
     .content {
-    	background-color: white;
+    	background-color: rgba(255, 255, 255, 0);
     	padding: 20px;
     	border: none;
     	max-width: 1000px;
@@ -15,10 +34,8 @@
 </head>
 <body>
 	<jsp:include page="../frame/menu.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">이용약관</h1>
-		</div>
+	<div class="jumbo">
+		<h1>이용약관</h1>
 	</div>
 	<div class="content">
         제1조(목적)<br>

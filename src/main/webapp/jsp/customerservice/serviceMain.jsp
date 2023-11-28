@@ -9,8 +9,23 @@
     color: black;
     text-decoration: none;
   }
+  body {
+      background-image: url('bg.png');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
+      min-height: 100vh;
+  }
+  .jumbo {
+    	background-color: rgba(255, 255, 255, 0);
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	text-align: center;
+    	color: #115A5B;
+	}
   .FAQ {
-    	background-color: white;
+    	background-color: rgba(255, 255, 255, 0);
     	border: none;
     	padding: 50px;
     	max-width: 1000px;
@@ -19,7 +34,7 @@
 	.QAA {
 		color: inherit;
     	text-decoration: none;
-    	background-color: white;
+    	background-color: rgba(255, 255, 255, 0);
     	border: none;
     	padding: 50px;
     	max-width: 1000px;
@@ -28,7 +43,7 @@
 	.term {
 		color: inherit;
     	text-decoration: none;
-    	background-color: white;
+    	background-color: rgba(255, 255, 255, 0);
     	border: none;
     	padding: 50px;
     	max-width: 1000px;
@@ -38,7 +53,7 @@
 	.adminQuestion {
 		color: inherit;
     	text-decoration: none;
-    	background-color: white;
+    	background-color: rgba(255, 255, 255, 0);
     	border: none;
     	padding: 50px;
     	max-width: 1000px;
@@ -49,10 +64,8 @@
 </head>
 <body>
 	<jsp:include page="../frame/menu.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">고객 센터</h1>
-		</div>
+	<div class="jumbo">
+		<h1>고객 센터</h1>
 	</div>
 	<div class="FAQ">
 		<h3>FAQ</h3>
