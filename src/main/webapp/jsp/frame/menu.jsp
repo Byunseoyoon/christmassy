@@ -7,6 +7,12 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+    	a {
+    		color: #115A5B;
+    		text-decoration: none;
+  		}
+    </style>
 </head>
 <body>
     <div class="navbar navbar-expand-lg navbar-light bg-light">
