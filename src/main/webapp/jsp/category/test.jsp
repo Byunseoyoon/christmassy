@@ -58,19 +58,15 @@ String pidx = request.getParameter("pidx");
     <h3><%=pname%></h3>
     <p>가격: <%=price%>원</p>
     
-<!-- Display the quantity and buttons horizontally -->
-<div class="quantity-section" style="display: flex; align-items: center;">
-    <p style="margin-right: 10px;">수량: <span id="quantityDisplay"><%=quantity%></span></p> <!-- 수량 표시 -->
-    <!-- 수량 조절을 위한 -와 + 버튼 -->
-    <button onclick="updateQuantity('-', <%=price%>)">-</button>
-    <button onclick="updateQuantity('+', <%=price%>)">+</button>
-</div>
-
-<!-- Display the order amount -->
-<div class="order-amount-section">
-    <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
-</div>
-
+    <!-- Display the quantity and buttons horizontally -->
+    <div class="quantity-section" style="display: flex; align-items: center;">
+        <p style="margin-right: 10px;">수량: <span id="quantityDisplay"><%=quantity%></span></p> <!-- 수량 표시 -->
+        <!-- 수량 조절을 위한 -와 + 버튼 -->
+        <button onclick="updateQuantity('-')">-</button>
+        <button onclick="updateQuantity('+')">+</button>
+    </div>
+    
+    
     
    
 
@@ -114,8 +110,8 @@ String pidx = request.getParameter("pidx");
 </html>
 
 <script>
-    // 수량을 업데이트하고 주문금액을 업데이트하는 함수
-    function updateQuantity(operation, unitPrice) {
+    // 수량을 업데이트하는 함수
+    function updateQuantity(operation) {
         var quantityElement = document.getElementById("quantityDisplay");
         var currentQuantity = parseInt(quantityElement.innerHTML);
 
@@ -128,10 +124,6 @@ String pidx = request.getParameter("pidx");
 
         // 화면에 표시된 수량 업데이트
         quantityElement.innerHTML = currentQuantity;
-
-        // 주문금액 계산 및 화면에 표시된 주문금액 업데이트
-        var orderAmount = unitPrice * currentQuantity;
-        document.getElementById("orderAmount").innerHTML = orderAmount + "원";
     }
 
     function showDetailSection() {
