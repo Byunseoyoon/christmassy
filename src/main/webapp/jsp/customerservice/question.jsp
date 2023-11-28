@@ -1,179 +1,3 @@
-<!--
-<html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-<title>고객 센터</title>
-<style>
-  a {
-    color: black;
-    text-decoration: none;
-  }
-  table {
-    width: 100%;
-    border-top: 1px solid #d3d3d3;
-    border-collapse: collapse;
-  }
-  th { 
-    background-color: #d3d3d3 ; 
-    border-top: 3px solid #727272;
-    text-align: center;
-  }
-  th, td {
-    border-bottom: 1px solid #d3d3d3;
-    padding: 10px;
-    text-align: center;
-  }
-  .greylist {
-    width: 50px;
-    height: 30px;
-    font-weight: 900;
-    color: white;
-    text-align: center;
-    background: grey;
-    border: solid 2px white;
-    border-radius: 5px;
-  }
-  .gradient {
-    width: 80px;
-    height: 30px;
-    font-weight: 900;
-    color: white;
-    text-align: center;
-    background: linear-gradient( to bottom, grey, black );
-    border: solid 2px white;
-    border-radius: 5px;
-  }
-  .right {float: right;}
-  .center {text-align: center;}
-</style>
-</head>
-<body>
-	<jsp:include page="../frame/menu.jsp" />
-	<div class="jumbotron">
-		<div class="container">
-			<h1 class="display-3">Q&A</h1>
-		</div>
-	</div>
-  <br>
-  <table>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>글쓴이</th>
-      <th>일시</th>
-    </tr>
-    <tr>
-      <td class="center">1</td>
-      <td class="left">게시글 1 입니다.</td>
-      <td class="center">김준석</td>
-      <td class="center">2022-05-18</td>
-    </tr>
-     <tr>
-        <td class="center">2</td>
-        <td class="left">게시글 2 입니다.</td>
-        <td class="center">김준석</td>
-        <td class="center">2022-05-18</td>
-    </tr>
-    <tr>
-        <td class="center">3</td>
-        <td class="left">게시글 3 입니다.</td>
-        <td class="center">김준석</td>
-        <td class="center">2022-05-18</td> 
-    </tr>
-  </table>
-  <br>
-  <span class="right">
-    <input type="button" value="글쓰기" class="gradient">
-  </span>
-	<jsp:include page="../frame/footer.jsp" />
-</body>
-</html> -->
-<!--
-<html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-<title>고객 센터</title>
-<style>
-  a {
-    color: black;
-    text-decoration: none;
-  }
-  table {
-    width: 100%;
-    border-top: 1px solid #d3d3d3;
-    border-collapse: collapse;
-  }
-  th { 
-    background-color: #d3d3d3 ; 
-    border-top: 3px solid #727272;
-    text-align: center;
-  }
-  th, td {
-    border-bottom: 1px solid #d3d3d3;
-    padding: 10px;
-    text-align: center;
-  }
-  .greylist {
-    width: 50px;
-    height: 30px;
-    font-weight: 900;
-    color: white;
-    text-align: center;
-    background: grey;
-    border: solid 2px white;
-    border-radius: 5px;
-  }
-  .gradient {
-    width: 80px;
-    height: 30px;
-    font-weight: 900;
-    color: white;
-    text-align: center;
-    background: linear-gradient( to bottom, grey, black );
-    border: solid 2px white;
-    border-radius: 5px;
-  }
-  .right {float: right;}
-  .center {text-align: center;}
-</style>
-</head>
-<body>
-  <jsp:include page="../frame/menu.jsp" />
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Q&A</h1>
-    </div>
-  </div>
-  <br>
-  <table>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>일시</th>
-    </tr>
-    <tr>
-      <td class="center">1</td>
-      <td class="left">게시글 1 입니다.</td>
-      <td class="center">2022-05-18</td>
-    </tr>
-    <tr>
-      <td class="center">2</td>
-      <td class="left">게시글 2 입니다.</td>
-      <td class="center">2022-05-18</td>
-    </tr>
-    <tr>
-      <td class="center">3</td>
-      <td class="left">게시글 3 입니다.</td>
-      <td class="center">2022-05-18</td> 
-    </tr>
-  </table>
-  <br>
-  <span class="right">
-    <input type="button" value="글쓰기" class="gradient">
-  </span>
-  <jsp:include page="../frame/footer.jsp" />
-</body>
-</html> -->
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
@@ -183,9 +7,24 @@
 <title>고객 센터</title>
 <style>
   a {
-    color: black;
+    color: #115A5B;
     text-decoration: none;
   }
+  body {
+      background-image: url('bg.png');
+      background-size: 100% auto;
+      background-repeat: repeat-y;
+      min-height: 100vh;
+  }
+  .jumbo {
+    	background-color: rgba(255, 255, 255, 0);
+    	border: none;
+    	padding: 50px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	text-align: center;
+    	color: #115A5B;
+	}
   table {
     width: 100%;
     border-top: 1px solid #d3d3d3;
@@ -193,13 +32,20 @@
   }
   th { 
     background-color: #d3d3d3 ; 
-    border-top: 3px solid #727272;
+    border-top: 3px solid #115A5B;
     text-align: center;
-  }
-  th, td {
+    color: white;
     border-bottom: 1px solid #d3d3d3;
     padding: 10px;
     text-align: center;
+    color: white;
+    background-color: #115A5B;
+  }
+  td {
+    border-bottom: 1px solid #d3d3d3;
+    padding: 10px;
+    text-align: center;
+    color: #115A5B;
   }
   .greylist {
     width: 50px;
@@ -208,6 +54,7 @@
     color: white;
     text-align: center;
     background: grey;
+    background-color: rgba(255, 255, 255, 0);
     border: solid 2px white;
     border-radius: 5px;
   }
@@ -218,6 +65,7 @@
     color: white;
     text-align: center;
     background: linear-gradient( to bottom, grey, black );
+    background-color: rgba(255, 255, 255, 0);
     border: solid 2px white;
     border-radius: 5px;
   }
@@ -227,11 +75,9 @@
 </head>
 <body>
   <jsp:include page="../frame/menu.jsp" />
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Q&A</h1>
-    </div>
-  </div>
+  <div class="jumbo">
+		<h1>Q&A</h1>
+	</div>
   <br>
   <table>
     <tr>
