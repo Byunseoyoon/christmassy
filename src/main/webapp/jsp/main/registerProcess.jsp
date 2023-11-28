@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -9,29 +12,32 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String midx = request.getParameter("midx");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String name = request.getParameter("name");
 	String phone = request.getParameter("phone");
 	String address = request.getParameter("address");
-	String date = request.getParameter("date");
 
 	PreparedStatement pstmt = null;
 
 	
 	try{
-		String sql = "INSERT INTO members(midx, id, pw, name, phone, address, mdate) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO members(id, pw, name, phone, address, mdate) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		// pstmt 생성
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, midx);
-		pstmt.setString(2, id);
-		pstmt.setString(3, pw);
-		pstmt.setString(4, name);
-		pstmt.setString(5, phone);
-		pstmt.setString(6, address);
-		pstmt.setString(7, date);
+		pstmt.setString(1, id);
+		pstmt.setString(2, pw);
+		pstmt.setString(3, name);
+		pstmt.setString(4, phone);
+		pstmt.setString(5, address);
+		
+		// 현재 날짜를 가져오기
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String contentDate = dateFormat.format(currentDate);
+		
+		pstmt.setString(6, contentDate);
 		
 		pstmt.executeUpdate();
 		response.sendRedirect("home.jsp");
