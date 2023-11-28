@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>카테고리</title>
 </head>
