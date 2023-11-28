@@ -6,7 +6,7 @@
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <style>
   a {
-    color: black;
+    color: #115A5B;
     text-decoration: none;
   }
   .jumbo {
@@ -19,19 +19,28 @@
     	color: #115A5B;
 	}
   table {
-    width: 100%;
+    width: 1500;
     border-top: 1px solid #d3d3d3;
     border-collapse: collapse;
+    margin-left:auto; 
+    margin-right:auto;
   }
   th { 
     background-color: #d3d3d3 ; 
-    border-top: 3px solid #727272;
+    border-top: 3px solid #115A5B;
     text-align: center;
-  }
-  th, td {
+    color: white;
     border-bottom: 1px solid #d3d3d3;
     padding: 10px;
     text-align: center;
+    color: white;
+    background-color: #115A5B;
+  }
+  td {
+    border-bottom: 1px solid #d3d3d3;
+    padding: 10px;
+    text-align: center;
+    color: #115A5B;
   }
   .greylist {
     width: 50px;
@@ -45,12 +54,14 @@
     border-radius: 5px;
   }
   .gradient {
+    background: #115A5B;  
+  	margin-right:100;
     width: 80px;
     height: 30px;
     font-weight: 900;
     color: white;
     text-align: center;
-    background: linear-gradient( to bottom, grey, black );
+    background: linear-gradient( to bottom, #115A5B, #115A5B );
     background-color: rgba(255, 255, 255, 0);
     border: solid 2px white;
     border-radius: 5px;
@@ -60,16 +71,16 @@
 </style>
 </head>
 <body>
-  <jsp:include page="../frame/menu.jsp" />
+  <jsp:include page="../frame/adminMenu.jsp" />
   <div class="jumbo">
-		<h1>Q&A</h1>
+		<h1>회원 목록</h1>
   </div>
   <br>
   <table>
     <tr>
-      <th>id</th>
-      <th>제목</th>
-      <th>일시</th>
+      <th class="center">id</th>
+      <th class="center">이름</th>
+      <th class="center">전화번호</th>
     </tr>
 <%
    Connection conn = null;
@@ -88,10 +99,8 @@
 	     // 데이터베이스 연결
 	     conn = DriverManager.getConnection(url, user, password);
 
-	     String sql = "SELECT members.id, help.q_num, help.title, help.content_date " +
-                 "FROM members " +
-                 "JOIN help ON members.midx = help.midx " +
-                 "WHERE help.confirmed = 'no'";
+	     String sql = "SELECT id, name, phone " +
+                 "FROM members ";
 	     stmt = conn.createStatement();
 	     rs = stmt.executeQuery(sql);
 
@@ -99,9 +108,9 @@
 
 	   %>
 	   <tr>
-	   <td class="center"><%= rs.getString("members.id") %></td>
-	   <td class="left"><a href="writeAnswer.jsp?help.q_num=<%= rs.getInt("help.q_num") %>"><%= rs.getString("help.title") %></a></td>
-	   <td class="center"><%= rs.getString("help.content_date") %></td>
+	   <td class="center"><%= rs.getString("id") %></td>
+	   <td class="left"><%= rs.getString("name") %></td>
+	   <td class="center"><%= rs.getString("phone") %></td>
 	   </tr>
 	   <%
 	   }

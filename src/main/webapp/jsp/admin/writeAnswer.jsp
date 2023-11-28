@@ -7,7 +7,7 @@
   <jsp:include page="../frame/header.jsp"></jsp:include>
 </head>
 <body>
-  <jsp:include page="../frame/menu.jsp" />
+  <jsp:include page="../frame/adminMenu.jsp" />
   <%int num = 0; %>
   <div class="container mt-5">
     <%
