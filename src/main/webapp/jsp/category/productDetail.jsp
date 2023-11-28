@@ -71,6 +71,13 @@ String pidx = request.getParameter("pidx");
     <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
 </div>
 
+<!-- 장바구니 버튼 -->
+<button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
+
+
+<!-- 주문 버튼 -->
+<button onclick="redirectToCheckout()">주문하기</button>
+
     
    
 
@@ -112,8 +119,22 @@ String pidx = request.getParameter("pidx");
     <jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
-
 <script>
+//장바구니에 상품 추가하는 함수
+function addToCart(productId, productName, unitPrice, quantity) {
+    // 장바구니에 추가된 상품 정보 출력
+    var message = productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.";
+    alert(message);
+}
+
+
+    // 주문 버튼 클릭 시 처리하는 함수
+    function redirectToCheckout() {
+        // 여기에서 주문하기 버튼을 클릭했을 때의 동작을 구현하세요.
+        // 예를 들어, 주문 페이지로 리다이렉션하는 등의 동작을 수행할 수 있습니다.
+        window.location.href = "testcart.jsp";
+    }
+
     // 수량을 업데이트하고 주문금액을 업데이트하는 함수
     function updateQuantity(operation, unitPrice) {
         var quantityElement = document.getElementById("quantityDisplay");
@@ -144,3 +165,4 @@ String pidx = request.getParameter("pidx");
         document.getElementById("reviewSection").style.display = "block";
     }
 </script>
+
