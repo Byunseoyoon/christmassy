@@ -58,9 +58,10 @@ String pidx = request.getParameter("pidx");
     <h3><%=pname%></h3>
     <p>가격: <%=price%>원</p>
     
+    
 <!-- Display the quantity and buttons horizontally -->
 <div class="quantity-section" style="display: flex; align-items: center;">
-    <p style="margin-right: 10px;">수량: <span id="quantityDisplay"><%=quantity%></span></p> <!-- 수량 표시 -->
+    <p style="margin-right: 10px;">수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span></p>
     <!-- 수량 조절을 위한 -와 + 버튼 -->
     <button onclick="updateQuantity('-', <%=price%>)">-</button>
     <button onclick="updateQuantity('+', <%=price%>)">+</button>
@@ -71,13 +72,13 @@ String pidx = request.getParameter("pidx");
     <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
 </div>
 
+
 <!-- 장바구니 버튼 -->
 <button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
 
-
 <!-- 주문 버튼 -->
-<button onclick="redirectToCheckout()">주문하기</button>
-
+<button onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+ 
     
    
 
@@ -120,41 +121,56 @@ String pidx = request.getParameter("pidx");
 </body>
 </html>
 <script>
+
+
 //장바구니에 상품 추가하는 함수
-function addToCart(productId, productName, unitPrice, quantity) {
+function addToCart(productId, productName, unitPrice) {
+    // 현재 수량 가져오기
+    var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
+    
     // 장바구니에 추가된 상품 정보 출력
     var message = productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.";
     alert(message);
 }
 
 
-    // 주문 버튼 클릭 시 처리하는 함수
-    function redirectToCheckout() {
-        // 여기에서 주문하기 버튼을 클릭했을 때의 동작을 구현하세요.
-        // 예를 들어, 주문 페이지로 리다이렉션하는 등의 동작을 수행할 수 있습니다.
-        window.location.href = "testcart.jsp";
+//주문 버튼 클릭 시 처리하는 함수
+function redirectToCheckout(productId) {
+    // 현재 수량 가져오기
+    var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
+    
+    // 주문 페이지로 이동하면서 상품 pidx와 수량 정보를 전달
+    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity;
+}
+
+
+
+//수량을 업데이트하고 주문금액을 업데이트하는 함수
+function updateQuantity(operation, unitPrice) {
+    var quantityElement = document.getElementById("quantityDisplay");
+    var currentQuantity = parseInt(quantityElement.getAttribute("data-quantity"));
+
+    // +나 - 버튼에 따라 수량 업데이트
+    if (operation === '+' && currentQuantity < 999) {
+        currentQuantity++;
+    } else if (operation === '-' && currentQuantity > 1) {
+        currentQuantity--;
     }
 
-    // 수량을 업데이트하고 주문금액을 업데이트하는 함수
-    function updateQuantity(operation, unitPrice) {
-        var quantityElement = document.getElementById("quantityDisplay");
-        var currentQuantity = parseInt(quantityElement.innerHTML);
+    // 화면에 표시된 수량 및 데이터 속성 업데이트
+    quantityElement.innerHTML = currentQuantity;
+    quantityElement.setAttribute("data-quantity", currentQuantity);
 
-        // +나 - 버튼에 따라 수량 업데이트
-        if (operation === '+') {
-            currentQuantity++;
-        } else if (operation === '-' && currentQuantity > 1) {
-            currentQuantity--;
-        }
+    // 주문금액 계산 및 화면에 표시된 주문금액 업데이트
+    var orderAmount = unitPrice * currentQuantity;
+    document.getElementById("orderAmount").innerHTML = orderAmount + "원";
+}
 
-        // 화면에 표시된 수량 업데이트
-        quantityElement.innerHTML = currentQuantity;
 
-        // 주문금액 계산 및 화면에 표시된 주문금액 업데이트
-        var orderAmount = unitPrice * currentQuantity;
-        document.getElementById("orderAmount").innerHTML = orderAmount + "원";
-    }
-
+   
+    
+    
+    
     function showDetailSection() {
         document.getElementById("detailSection").style.display = "block";
         document.getElementById("reviewSection").style.display = "none";
