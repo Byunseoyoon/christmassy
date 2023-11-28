@@ -2,8 +2,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
-<title>배송 정보</title>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="../frame/menu.jsp" />

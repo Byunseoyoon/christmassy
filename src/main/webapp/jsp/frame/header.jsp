@@ -4,14 +4,15 @@
 	<meta charset="utf-8">
 	<title>Christmassy</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-	<link href="/Christmassy/src/main/webapp/resources/css/nomarlize.css" rel="stylesheet">
+	<!-- <link href="/Christmassy/src/main/webapp/resources/css/nomarlize.css" rel="stylesheet"> -->
 	<style>
-	body{
-		background-color: #F4EEEE;
-	}
+		body {
+	      background-image: url('../../resources/images/bg.png');
+	      background-size: 100% auto;
+	      background-repeat: repeat-y;
+	      min-height: 100vh;
+	  }
 	</style>
 </head>
-<body>
-</body>
 </html>
 

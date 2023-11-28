@@ -4,16 +4,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
-  <title>고객센터</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-  <style>
-  	body {
-      background-image: url('bg.png');
-      background-size: 100% auto;
-      background-repeat: repeat-y;
-      min-height: 100vh;
-  }
-  </style>
+  <jsp:include page="../frame/header.jsp"></jsp:include>
 </head>
 <body>
   <jsp:include page="../frame/menu.jsp" />

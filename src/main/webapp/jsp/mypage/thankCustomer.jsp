@@ -2,8 +2,7 @@
 <%@ page import="java.net.URLDecoder"%>
 <html>
 <head>
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
-<title>주문 완료</title>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 </head>
 <body>
 	<%
