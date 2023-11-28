@@ -35,7 +35,7 @@
 		  position: fixed;    /* 스크롤을 따라오도록 지정 */
 		  background-color: inherit;
 		  border-style: solid;
-  		  border-color: #194F35;
+  		  background-color:transparent;
 		  width: var(--side-bar-width);		  
 		  margin-top: calc((100vh - var(--side-bar-height)) / 2);    /* 사이드바 위와 아래의 마진을 동일하게 지정 */
 		  margin-left: calc((100vh - var(--side-bar-height)) / 2); 
@@ -92,9 +92,13 @@
 		      <a href="../mypage/cart.jsp">장바구니</a>
 		    </li>
 		    <li>
-		      <a href="../mypage/shippingInfo.jsp">구매목록</a>
+		      <a href="../mypage/buyList.jsp">구매목록</a>
 		    </li>
 		</ul>
 	</aside>
 </body>
+<script>
+
+
+</script>
 </html>
