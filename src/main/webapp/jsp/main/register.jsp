@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <title>Login</title>
+    <jsp:include page="../frame/header.jsp"></jsp:include>
     <style>
         .center-content {
             text-align: center; /* 내용 가운데 정렬 */

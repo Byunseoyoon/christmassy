@@ -12,13 +12,13 @@
     <div class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <!-- 왼쪽에 CHRISTMASSY 표시 -->
-            <a class="navbar-brand" href="home.jsp">CHRISTMASSY</a>
+            <a class="navbar-brand" href="../main/home.jsp">CHRISTMASSY</a>
 
             <!-- 오른쪽에 네비게이션 메뉴들 표시 -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.jsp">Home</a>
+                        <a class="nav-link" href="../main/home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Products</a>
@@ -27,10 +27,10 @@
                         <a class="nav-link" href="../customerservice/serviceMain.jsp">Help</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">MyPage</a>
+                        <a class="nav-link" href="../mypage/userInfo.jsp">MyPage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
+                        <a class="nav-link" href="../mypage/cart.jsp">Cart</a>
                     </li>
                     <li class="nav-item">
                         <%
