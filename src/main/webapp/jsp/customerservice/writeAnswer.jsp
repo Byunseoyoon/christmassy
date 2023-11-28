@@ -57,7 +57,7 @@
             <%-- 파일이 있는 경우에만 이미지 표시 --%>
             <% if (file != null && !file.isEmpty()) { %>
               <p><strong>사진:</strong></p>
-              <img src="<%= "C:\\upload\\" + file %>" alt="사진">
+              <img src="<%= "../../resources/images/" + file %>" alt="사진">
             <% } %>
             <% if (answer != null) { %>
               <p><strong>답변:</strong></p>
