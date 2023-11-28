@@ -14,7 +14,7 @@
             // 데이터베이스 연결
             String url = "jdbc:mysql://localhost:3306/christmassyDB?serverTimezone=UTC";
             String username = "root";
-            String password = "gyuri127";
+            String password = "1234";
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
