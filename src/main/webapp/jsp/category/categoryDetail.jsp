@@ -12,6 +12,7 @@ String categoryDetail = request.getParameter("categoryDetail");
 
 <html>
 <head>
+<jsp:include page="../frame/header.jsp"></jsp:include>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="categoryDetail.css"> <!-- Include the CSS file -->
 <script type="text/javascript" src="categoryDetail.js"></script> <!-- Include the JavaScript file -->
@@ -26,10 +27,12 @@ String categoryDetail = request.getParameter("categoryDetail");
             <h1 class="display-3"><%=categoryDetail%></h1>
         </div>
 
-        <div id="mainContent">
+       
+    </div>
+    
+    <div id="mainContent">
             <jsp:include page="category.jsp" />
         </div>
-    </div>
 
     <%
         Connection connection = null;
