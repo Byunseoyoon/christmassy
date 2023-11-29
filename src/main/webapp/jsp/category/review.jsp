@@ -34,7 +34,7 @@ String pidx = request.getParameter("pidx");
 </head>
 <body>
 
-<p>리뷰jsp</p>
+
 
    
    

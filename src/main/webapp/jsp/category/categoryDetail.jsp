@@ -22,17 +22,22 @@ String categoryDetail = request.getParameter("categoryDetail");
 <body>
 
     <jsp:include page="../frame/menu.jsp" />
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3"><%=categoryDetail%></h1>
-        </div>
 
        
-    </div>
-    
-    <div id="mainContent">
-            <jsp:include page="category.jsp" />
+
+  <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center jumbo">
+                <h1><%=categoryDetail%></h1>
+            </div>
         </div>
+        <div class="row">
+<div class="col-md-2" style="padding-left: 5px; padding-right: 5px;">
+    <div id="categoryContainer" style="max-width: 200px; margin: 10px;">
+        <jsp:include page="category.jsp" />
+    </div>
+</div>
+
 
     <%
         Connection connection = null;
@@ -50,9 +55,11 @@ String categoryDetail = request.getParameter("categoryDetail");
             resultSet = pstmt.executeQuery();
     %>
 
-    <div class="container">
-        <div class="row">
-            <%
+
+            <div class="col-md-10 ">
+                <div class="container">
+                    <div class="row">
+                       <%
                 while (resultSet.next()) {
                     int pidx = resultSet.getInt("pidx");
                     String pname = resultSet.getString("pname");
@@ -61,15 +68,18 @@ String categoryDetail = request.getParameter("categoryDetail");
                     String image = resultSet.getString("image");
             %>
 
-            <div class="product-container" onclick="redirectToProductDetail('<%=pidx%>')">
-                <img src="../../resources/images/<%=image%>" style="width: 100%;  height: 200px" />
-                <h3><%=pname%></h3>
-                <p>가격: <%=price%>원</p>
-                <p>설명: <%=descriptor%></p>
-                
-            </div>
-
-            <%
+   <div class="col-5 ml-4 mr-4 mb-3 product-container" onclick="redirectToProductDetail('<%=pidx%>')"
+     style="display: flex; flex-direction: column; align-items: center;">
+    <img src="../../resources/images/<%=image%>" style="width: 350px; height: 350px;" />
+    <h4 style="margin-top: 10px;"><%=pname%></h4>
+    <p>가격: <%=price%>원</p>
+    <p>설명: <%=descriptor%></p>
+</div>
+   
+   
+   
+                    
+                        <%
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -80,8 +90,14 @@ String categoryDetail = request.getParameter("categoryDetail");
                 if (connection != null) connection.close();
             }
             %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
 
     <div class="container">
         <hr>

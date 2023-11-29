@@ -27,6 +27,24 @@ String pidx = request.getParameter("pidx");
             justify-content: space-between;
             margin-bottom: 20px;
         }
+        
+        
+        
+         .left
+         {
+        margin-top: 100px; /* 적절한 여백 값으로 조절하세요 */
+         background-color: white;
+        
+    }
+         
+    .right {
+        margin-top: 170px; /* 적절한 여백 값으로 조절하세요 */
+         background-color: green;
+          padding: 10px 40px; /* 위아래 10px, 좌우 20px의 패딩을 가진 버튼 
+        
+       
+        
+    }
 
         .product-info img {
             max-width: 100%;
@@ -44,12 +62,25 @@ String pidx = request.getParameter("pidx");
             margin-left: 10px;
         }
         
-        
          .centered-buttons {
-        display: flex;
+         display: flex;
         justify-content: center;
-        align-items: center;
-        height: 100%;
+        margin-top: 20px; /* 상단 여백 조절 */
+    }
+        
+          .centered-buttons button {
+        padding: 10px 20px; /* 원하는 패딩 값으로 조절하세요 */
+        margin: 10px;
+        font-size: 16px; /* 원하는 폰트 크기로 조절하세요 */
+        background-color: #103E3F; /* 원하는 배경색으로 조절하세요 */
+        color: #ffffff; /* 원하는 텍스트 색상으로 조절하세요 */
+        border: none; /* 테두리 제거 */
+        border-radius: 5px; /* 버튼 둥글게 만들기 위한 속성 */
+        cursor: pointer; /* 커서 모양 변경 */
+    }
+
+    .centered-buttons button:hover {
+        background-color: #FF0000; /* 마우스 호버 시 배경색 변경 */
     }
         
         
@@ -75,7 +106,7 @@ String pidx = request.getParameter("pidx");
                     connection = getConnection();
 
                     // 동적 SQL 쿼리
-                    String query = "SELECT pidx, pname, price, descriptor, image FROM products WHERE pidx = ?";
+                    String query = "SELECT pidx, pname, price, descriptor, image ,flag FROM products WHERE pidx = ?";
                     pstmt = connection.prepareStatement(query);
                     pstmt.setString(1, pidx);
                     System.out.println("실행된 쿼리: " + pstmt.toString());
@@ -88,26 +119,94 @@ String pidx = request.getParameter("pidx");
                         int price = resultSet.getInt("price");
                         String descriptor = resultSet.getString("descriptor");
                         String image = resultSet.getString("image");
+                        int flag = resultSet.getInt("flag");
                         int quantity = 1; // 실제 수량 값으로 대체 가능
+                        
+                        String flag1=null;
+                        String flag2=null;
+                        String flag3=null;
+                        
+                        
+                        
+                        
+                     // flag 값이 0이 아닌 경우에만 flag1, flag2, flag3 값을 가져오기
+                        if (flag != 0) {
+                        	
+                            String flagQuery = "SELECT flag1, flag2, flag3 FROM flag WHERE pidx = ?";
+                            try (PreparedStatement flagPstmt = connection.prepareStatement(flagQuery)) {
+                                flagPstmt.setInt(1, productId);
+                                ResultSet flagResultSet = flagPstmt.executeQuery();
+
+                                if (flagResultSet.next()) {
+                                   flag1 = flagResultSet.getString("flag1");
+                                     flag2 = flagResultSet.getString("flag2");
+                                    flag3 = flagResultSet.getString("flag3");
+
+                                    // flag1, flag2, flag3 값을 사용하여 화면에 출력하거나 다른 작업 수행
+                                   
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
             %>
 
 
 
             <!-- Product Information Section -->
-            <div class="col-md-12 product-info">
-           	 <div class="row">
+           <div class="col-md-7 left">
+           	
                
-                <div class="col-md-6 left">
+                
                     <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
+                
+                
+               
                 </div>
-
-				<div class="col-md-6 right">
-						
-						
+                
+                
+                
+<div class="col-md-4 right"style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+				
 						<h3><%=pname%></h3>
 						<p>
 							가격:	<%=price%>원
 						</p>
+						
+						
+<!-- Display options only if flag values are available -->
+<%
+if (flag1 != null && flag2 != null && flag3 != null) {
+%>
+    <div class="options-section">
+        <p>옵션:</p>
+        <label>
+            <input type="radio" name="option" value="<%=flag1%>" checked>
+            <span><%=flag1%></span>
+        </label>
+        <label>
+            <input type="radio" name="option" value="<%=flag2%>">
+            <span><%=flag2%></span>
+        </label>
+        <label>
+            <input type="radio" name="option" value="<%=flag3%>">
+            <span><%=flag3%></span>
+        </label>
+    </div>
+<%
+}
+%>
+
+						
+						
+						
+						
 
 						<!-- Display the quantity and buttons horizontally -->
 						<div class="quantity-section">
@@ -126,21 +225,20 @@ String pidx = request.getParameter("pidx");
 							</p>
 						</div>
 
+<div ="row">
 						<!-- Cart and Order buttons -->
 						<button
 							onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니
 							담기</button>
+			
+			
+			
 						<button
 							onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
-
-				</div>
-			</div>
-
-                   
-          </div>
-            
-                  
-                
+</div>
+				
+			     
+           </div>     
             
          
             <div class="col-md-12 product-info centered-buttons">
@@ -150,6 +248,9 @@ String pidx = request.getParameter("pidx");
             
             
             </div>
+           
+
+</div>
 
 
 
@@ -193,26 +294,30 @@ String pidx = request.getParameter("pidx");
 <script>
 
 
-//장바구니에 상품 추가하는 함수
+// 장바구니에 상품 추가하는 함수
 function addToCart(productId, productName, unitPrice) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
-    
-    // 장바구니에 추가된 상품 정보 출력
-    var message = productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.";
+
+    // 선택된 옵션 가져오기
+    var selectedOption = document.querySelector('input[name="option"]:checked').value;
+
+    // 상품 정보 및 선택된 옵션을 alert로 표시
+    var message = productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.\n선택된 옵션: " + selectedOption;
     alert(message);
 }
 
-
-//주문 버튼 클릭 시 처리하는 함수
+// 주문 버튼 클릭 시 처리하는 함수
 function redirectToCheckout(productId) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
-    
-    // 주문 페이지로 이동하면서 상품 pidx와 수량 정보를 전달
-    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity;
-}
 
+    // 선택된 옵션 가져오기
+    var selectedOption = document.querySelector('input[name="option"]:checked').value;
+
+    // 주문 페이지로 이동하면서 상품 pidx, 수량, 옵션 정보를 전달
+    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + selectedOption;
+}
 
 
 //수량을 업데이트하고 주문금액을 업데이트하는 함수
@@ -236,6 +341,18 @@ function updateQuantity(operation, unitPrice) {
     document.getElementById("orderAmount").innerHTML = orderAmount + "원";
 }
 
+
+
+// 옵션 토글을 위한 함수
+function toggleOptions() {
+    var optionsSection = document.querySelector('.options-section');
+    optionsSection.classList.toggle('show-options');
+}
+
+// 페이지 로드 시 옵션 토글 함수 호출
+window.onload = function() {
+    toggleOptions();
+};
 
    
     
