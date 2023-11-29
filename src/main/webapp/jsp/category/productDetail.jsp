@@ -146,7 +146,7 @@ String pidx = request.getParameter("pidx");
             <div class="col-md-12 product-info centered-buttons">
              <!-- 상세보기와 리뷰 버튼 -->
     <button onclick="showDetailSection()">상세보기</button>
-    <button onclick="showReviewSection()">리뷰</button>
+    <button onclick="showReviewSection(<%=pidx%>)">리뷰</button>
             
             
             </div>
@@ -157,17 +157,19 @@ String pidx = request.getParameter("pidx");
 
 
 
-            <!-- 상세보기 섹션 -->
-            <div class="col-md-12 detail-section" id="detailSection">
-                <!-- 상세보기 내용 -->
-                <p>설명: <%=descriptor%></p>
-            </div>
+             <!-- 상세보기 섹션 -->
+    <div class="col-md-12 detail-section" id="detailSection">
+        <!-- 상세보기 내용 -->
+        <p>설명: <%=descriptor%></p>
+    </div>
 
-            <!-- 리뷰 섹션 -->
-            <div class="col-md-12 review-section" id="reviewSection" style="display: none;">
-                <!-- 리뷰 내용 -->
-                리뷰 내용이 여기에 표시됩니다.
-            </div>
+             <!-- 리뷰 섹션 -->
+    <div class="col-md-12 review-section" id="reviewSection" style="display: none;">
+        <!-- 리뷰 내용 -->
+       
+    </div>
+    
+    
 
             <%
                     }
@@ -244,10 +246,24 @@ function updateQuantity(operation, unitPrice) {
         document.getElementById("reviewSection").style.display = "none";
     }
 
-    function showReviewSection() {
+    function showReviewSection(productId) {
+        // 리뷰 섹션을 업데이트
         document.getElementById("detailSection").style.display = "none";
         document.getElementById("reviewSection").style.display = "block";
+
+        // review.jsp의 내용을 가져와서 리뷰 섹션에 표시
+        fetch('review.jsp?pidx=' + productId) // pidx 값을 추가하여 review.jsp 파일의 경로에 맞게 수정
+            .then(response => response.text())
+            .then(data => {
+                console.log('Review content:', data); // 콘솔에 데이터 출력
+                document.getElementById("reviewSection").innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error fetching review content:', error);
+            });
     }
+
+ 
 </script>
 
 
