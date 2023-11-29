@@ -43,6 +43,17 @@ String pidx = request.getParameter("pidx");
         .quantity-section button {
             margin-left: 10px;
         }
+        
+        
+         .centered-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+        
+        
+        
     </style>   
     
     
@@ -84,37 +95,55 @@ String pidx = request.getParameter("pidx");
 
             <!-- Product Information Section -->
             <div class="col-md-12 product-info">
-                <div class="col-md-6">
+           	 <div class="row">
+               
+                <div class="col-md-6 left">
                     <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
                 </div>
 
-                <div class="col-md-6">
-                    <h3><%=pname%></h3>
-                    <p>가격: <%=price%>원</p>
+				<div class="col-md-6 right">
+						
+						
+						<h3><%=pname%></h3>
+						<p>
+							가격:	<%=price%>원
+						</p>
 
-                    <!-- Display the quantity and buttons horizontally -->
-                    <div class="quantity-section">
-                        <p>수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span></p>
-                        <!-- Quantity adjustment buttons -->
-                        <button onclick="updateQuantity('-', <%=price%>)">-</button>
-                        <button onclick="updateQuantity('+', <%=price%>)">+</button>
-                    </div>
+						<!-- Display the quantity and buttons horizontally -->
+						<div class="quantity-section">
+							<p>
+								수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span>
+							</p>
+							<!-- Quantity adjustment buttons -->
+							<button onclick="updateQuantity('-', <%=price%>)">-</button>
+							<button onclick="updateQuantity('+', <%=price%>)">+</button>
+						</div>
 
-                    <!-- Display the order amount -->
-                    <div class="order-amount-section">
-                        <p>주문금액: <span id="orderAmount"><%=price * quantity%>원</span></p>
-                    </div>
+						<!-- Display the order amount -->
+						<div class="order-amount-section">
+							<p>
+								주문금액: <span id="orderAmount"><%=price * quantity%>원</span>
+							</p>
+						</div>
 
-                    <!-- Cart and Order buttons -->
-                    <button onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니 담기</button>
-                    <button onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
-                </div>
+						<!-- Cart and Order buttons -->
+						<button
+							onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니
+							담기</button>
+						<button
+							onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+
+				</div>
+			</div>
+
+                   
+          </div>
             
                   
                 
-            </div>
             
-            <div class="col-md-12">
+         
+            <div class="col-md-12 product-info centered-buttons">
              <!-- 상세보기와 리뷰 버튼 -->
     <button onclick="showDetailSection()">상세보기</button>
     <button onclick="showReviewSection()">리뷰</button>
@@ -153,6 +182,8 @@ String pidx = request.getParameter("pidx");
             %>
         </div>
     </div>
+    
+
 
     <jsp:include page="../frame/footer.jsp" />
 </body>
