@@ -5,6 +5,55 @@
 <html>
 <head>
   <jsp:include page="../frame/header.jsp"></jsp:include>
+  <style>
+    .title {
+      margin-top: 50;
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      color: #115A5B;
+      font-size: 30px;
+      font-weight: bolder;
+    }
+    .date {
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      color: #115A5B;
+      font-weight: bolder;
+    }
+    .answer {
+      background: rgba(17, 90, 91, 0.3);
+      color: black;
+      padding: 20px;
+      width: 600px;
+      height: 150px;
+      font-weight: bolder;
+      display: inline-block;
+    }
+    .content-and-pic {
+      display: flex;
+      align-items: flex-start; /* 수직 정렬을 위해 flex-start 사용 */
+      gap: 20px; /* 콘텐츠와 이미지 사이의 간격 설정 */
+    }
+    .content {
+      background: rgba(17, 90, 91, 0.3);
+      color: black;
+      padding: 20px;
+      width: 600px;
+      height: 300px;
+      font-weight: bolder;
+    }
+    .pic {
+      text-align: center;
+    }
+    .pic img {
+      max-width: 300px;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
   <jsp:include page="../frame/menu.jsp" />
@@ -28,19 +77,19 @@
         // 데이터베이스 연결
         conn = DriverManager.getConnection(url, user, password);
 
-     // 세션에서 userId 가져오기
+        // 세션에서 userId 가져오기
         session = request.getSession();
         String loggedInUserId = (String) session.getAttribute("userId");
-        
-     // SQL 쿼리 (MySQL 쿼리)
+
+        // SQL 쿼리 (MySQL 쿼리)
         String qParam = request.getParameter("q_num");
-     	int num = Integer.parseInt(qParam);
+        int num = Integer.parseInt(qParam);
         String sql = "SELECT * FROM help WHERE q_num = ?";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, num);
         rs = pstmt.executeQuery();
-        
-     // 결과 처리
+
+        // 결과 처리
         if (rs.next()) {
           String title = rs.getString("title");
           String contents = rs.getString("contents");
@@ -48,21 +97,19 @@
           String contentDate = rs.getString("content_date");
           String confirmed = rs.getString("confirmed");
           String answer = rs.getString("answer");
-
     %>
           <div>
-            <h3><%= title %></h3>
-            <p><strong>작성일:</strong> <%= contentDate %></p>
-            <p><strong>내용:</strong> <%= contents %></p>
-            <%-- 파일이 있는 경우에만 이미지 표시 --%>
-            <% if (file != null && !file.isEmpty()) { %>
-              <p><strong>사진:</strong></p>
-              <img src="<%= "../../resources/images/" + file %>" alt="사진">
-            <% } %>
-            <p><strong>답변여부:</strong> <%= confirmed %></p>
+            <p class="title"><strong>제목: </strong> <%= title + " "%><%= confirmed.equals("yes") ? "✔" : "❌" %></p>
+            <p class="date"><strong>일시: </strong><%= contentDate %></p>
+            <div class="content-and-pic">
+              <span class="content"><%= contents %></span>
+              <% if (file != null && !file.isEmpty()) { %>
+                <span class="pic"><img src="<%= "../../resources/images/" + file %>" alt="사진"></span>
+              <% } %>
+            </div>
+            <p>
             <% if (answer != null) { %>
-              <p><strong>답변:</strong></p>
-              <%= answer %>
+              <p class="answer"><%= answer %></p>
             <% } %>
           </div>
     <%
