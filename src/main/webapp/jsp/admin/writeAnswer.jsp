@@ -5,6 +5,90 @@
 <html>
 <head>
   <jsp:include page="../frame/header.jsp"></jsp:include>
+    <style>
+    .title {
+      margin-top: 100;
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      color: #115A5B;
+      font-size: 30px;
+      font-weight: bolder;
+    }
+    .date {
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      color: #115A5B;
+      font-weight: bolder;
+    }
+    .answer {
+      background: rgba(17, 90, 91, 0.3);
+      color: black;
+      padding: 20px;
+      width: 600px;
+      height: 150px;
+      font-weight: bolder;
+      display: inline-block;
+    }
+    .content-and-pic {
+      display: flex;
+      align-items: flex-start; /* 수직 정렬을 위해 flex-start 사용 */
+      gap: 20px; /* 콘텐츠와 이미지 사이의 간격 설정 */
+    }
+    .content {
+      background: rgba(17, 90, 91, 0.3);
+      color: black;
+      padding: 20px;
+      width: 600px;
+      height: 300px;
+      font-weight: bolder;
+    }
+    .pic {
+      text-align: center;
+    }
+    .pic img {
+      max-width: 300px;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+    .gradient {
+      background: #115A5B;  
+  	  margin-right:100;
+      width: 80px;
+      height: 30px;
+      font-weight: 900;
+      color: white;
+      text-align: center;
+      background: linear-gradient( to bottom, #115A5B, #115A5B );
+      background-color: rgba(255, 255, 255, 0);
+      border: solid 2px white;
+      border-radius: 5px;
+    }
+    .btn {
+      margin-top: 20px;
+      margin-botton: 40px;
+  	  margin-left: 500px;
+    }
+    .answer {
+  	  background-color: rgba(17, 90, 91, 0.3);
+  	  margin-top: 10px;
+  	  height: 150px;
+      width: 600px;
+      color: black;
+    }
+    .answer textarea {
+      background-color: rgba(0, 0, 0, 0);
+      width: 100%;
+  	  height: 100%;
+      border: none;
+      outline: none;
+    }
+    .answer textarea:focus {
+      box-shadow: none;
+    }
+  </style>
 </head>
 <body>
   <jsp:include page="../frame/adminMenu.jsp" />
@@ -51,17 +135,17 @@
 
     %>
           <div>
-            <h3><%= title %></h3>
-            <p><strong>작성일:</strong> <%= contentDate %></p>
-            <p><strong>내용:</strong> <%= contents %></p>
-            <%-- 파일이 있는 경우에만 이미지 표시 --%>
-            <% if (file != null && !file.isEmpty()) { %>
-              <p><strong>사진:</strong></p>
-              <img src="<%= "../../resources/images/" + file %>" alt="사진">
-            <% } %>
+            <p class="title"><strong>제목: </strong> <%= title%></p>
+            <p class="date"><strong>일시: </strong><%= contentDate %></p>
+            <div class="content-and-pic">
+              <span class="content"><%= contents %></span>
+              <% if (file != null && !file.isEmpty()) { %>
+                <span class="pic"><img src="<%= "../../resources/images/" + file %>" alt="사진"></span>
+              <% } %>
+            </div>
+            <p>
             <% if (answer != null) { %>
-              <p><strong>답변:</strong></p>
-              <%= answer %>
+              <p class="answer"><%= answer %></p>
             <% } %>
           </div>
     <%
@@ -83,12 +167,13 @@
   </div>
   <div class="container mt-5">
   <form action="saveAnswer.jsp" method="post">
-    <div class="form-group">
-      <label for="q_answer">답변:</label>
+    <div class="answer">
       <textarea class="form-control" id="q_answer" name="q_answer" rows="4" required></textarea>
     </div>
     <input type="hidden" name="q_num" value="<%= num %>">
-	<button type="submit" class="btn btn-primary">답변 작성</button>
+    <div class="btn">
+    	<button type="submit" class="gradient">답변</button>
+    </div>
   </form>
 	</div>
   <jsp:include page="../frame/footer.jsp" />

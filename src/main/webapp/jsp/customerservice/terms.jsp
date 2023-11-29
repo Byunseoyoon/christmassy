@@ -15,6 +15,7 @@
     	margin:0 auto;
     	text-align: center;
     	color: #115A5B;
+    	font-weight: bolder; 
 	}
     .content {
     	background-color: rgba(255, 255, 255, 0);
