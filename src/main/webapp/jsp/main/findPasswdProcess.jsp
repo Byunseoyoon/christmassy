@@ -7,15 +7,17 @@
 	request.setCharacterEncoding("UTF-8");
 
     String id = request.getParameter("id");
+    String name = request.getParameter("name");
 
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
     try {
         // 쿼리 실행
-        String query = "SELECT pw FROM members WHERE id=?";
+        String query = "SELECT pw FROM members WHERE id=? and name=?";
         preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, id);
+        preparedStatement.setString(2, name);
         resultSet = preparedStatement.executeQuery();
 
         // 결과를 클라이언트로 보내기
