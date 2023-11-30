@@ -7,16 +7,99 @@
 <%@ include file="connect.jsp" %>
 
 <%
+String category = request.getParameter("category");
 String categoryDetail = request.getParameter("categoryDetail");
+
 %>
 
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="categoryDetail.css"> <!-- Include the CSS file -->
+
+
 <script type="text/javascript" src="categoryDetail.js"></script> <!-- Include the JavaScript file -->
 <title><%=categoryDetail %></title>
+    
+    <style>
+    
+    
+.product-container {
+    width: 48%;
+    margin: 1%;
+    float: left;
+    margin-bottom: 20px; /* Adjust the spacing as needed */ 
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+.product-container img {
+    width: 200px;
+    height: 200px;
+}
+
+
+
+
+    .header-text {
+        color: black; /* 텍스트 색상을 검은색으로 설정 */
+        text-align: left;
+    }
+
+ a {
+    color: black;
+    text-decoration: none;
+  }
+
+/* style.css 또는 해당 JSP 페이지의 <style> 태그 내에 추가 */
+#categoryContainer {
+    max-width: 150px; /* 최대 너비를 설정 (원하는 값으로 변경) */
+    max-height: 150px;
+    margin: 10px; /* 여백 설정 (원하는 값으로 변경) */
+}
+
+
+ .jumbo {
+background-color: rgba(255, 255, 255, 0);
+    	
+    	border: none;
+    	padding: 0px;
+    	max-width: 1000px;
+    	margin:0 auto;
+    	
+    	color: #115A5B;
+    	   margin-top: 15px; /* Adjust the top margin as needed */
+    margin-bottom: 5px; /* Adjust the bottom margin as needed */
+	}
+	
+	.jumbo h1 {
+    font-size: 3em; /* Adjust the font size as needed */
+    
+}
+
+    .custom-hr1 {
+        border-width: 2px; /* 굵기를 조절합니다. */
+            border-color: rgba(0, 0, 0, 0.3); /* 검은색과 30% 투명도를 지정합니다. */
+    }
+    
+    .product-name {
+    margin-top: 10px;
+    /* 다른 스타일을 추가하세요 */
+}
+
+.product-price {
+    /* 다른 스타일을 추가하세요 */
+}
+
+.product-description {
+    /* 다른 스타일을 추가하세요 */
+}
+    
+
+</style>
+    
     
 </head>
 <body>
@@ -28,9 +111,12 @@ String categoryDetail = request.getParameter("categoryDetail");
   <div class="container">
         <div class="row">
             <div class="col-md-12 text-center jumbo">
-                <h1><%=categoryDetail%></h1>
+                <h2 class="header-text"><%=category%> > <%=categoryDetail%></h2>
             </div>
         </div>
+        
+            <hr class="custom-hr1"> <!-- custom-hr1 클래스를 적용하여 가로선 추가 -->
+         
         <div class="row">
 <div class="col-md-2" style="padding-left: 5px; padding-right: 5px;">
     <div id="categoryContainer" style="max-width: 200px; margin: 10px;">
@@ -68,14 +154,13 @@ String categoryDetail = request.getParameter("categoryDetail");
                     String image = resultSet.getString("image");
             %>
 
-   <div class="col-5 ml-4 mr-4 mb-3 product-container" onclick="redirectToProductDetail('<%=pidx%>')"
-     style="display: flex; flex-direction: column; align-items: center;">
-    <img src="../../resources/images/<%=image%>" style="width: 350px; height: 350px;" />
-    <h4 style="margin-top: 10px;"><%=pname%></h4>
-    <p>가격: <%=price%>원</p>
-    <p>설명: <%=descriptor%></p>
+<div class="col-3 product-container" onclick="redirectToProductDetail('<%=pidx%>')">
+    <img src="../../resources/images/<%=image%>" class="product-image" />
+    <h4 class="product-name"><%=pname%></h4>
+    <p class="product-price">가격: <%=price%>원</p>
+    <p class="product-description">설명: <%=descriptor%></p>
 </div>
-   
+
    
    
                     

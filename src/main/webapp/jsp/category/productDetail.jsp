@@ -1,10 +1,10 @@
 
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="javax.naming.InitialContext" %>
-<%@ page import="javax.sql.DataSource" %>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="javax.naming.InitialContext"%>
+<%@ page import="javax.sql.DataSource"%>
 
-<%@ include file="connect.jsp" %>
+<%@ include file="connect.jsp"%>
 
 <%
 String pidx = request.getParameter("pidx");
@@ -13,244 +13,292 @@ String pidx = request.getParameter("pidx");
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="productDetail.css"> <!-- CSS 파일 포함 -->
-    <script type="text/javascript" src="productDetail.js"></script> <!-- JavaScript 파일 포함 -->
-    <title>제품 상세정보</title>
-    
-    
-  <style>
-        /* Add any additional styles for the layout */
-        .product-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        
-        
-        
-         .left
-         {
-        margin-top: 100px; /* 적절한 여백 값으로 조절하세요 */
-         background-color: white;
-        
-    }
-         
-    .right {
-        margin-top: 170px; /* 적절한 여백 값으로 조절하세요 */
-         background-color: green;
-          padding: 10px 40px; /* 위아래 10px, 좌우 20px의 패딩을 가진 버튼 
-        
-       
-        
-    }
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="productDetail.css">
+<!-- CSS 파일 포함 -->
+<script type="text/javascript" src="productDetail.js"></script>
+<!-- JavaScript 파일 포함 -->
+<title>제품 상세정보</title>
 
-        .product-info img {
-            max-width: 100%;
-            max-height: 500px; /* Adjust the max-height as needed */
-            margin-right: 20px;
-        }
 
-        .quantity-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+<style>
 
-        .quantity-section button {
-            margin-left: 10px;
-        }
-        
-         .centered-buttons {
-         display: flex;
-        justify-content: center;
-        margin-top: 20px; /* 상단 여백 조절 */
-    }
-        
-          .centered-buttons button {
-        padding: 10px 20px; /* 원하는 패딩 값으로 조절하세요 */
-        margin: 10px;
-        font-size: 16px; /* 원하는 폰트 크기로 조절하세요 */
-        background-color: #103E3F; /* 원하는 배경색으로 조절하세요 */
-        color: #ffffff; /* 원하는 텍스트 색상으로 조절하세요 */
-        border: none; /* 테두리 제거 */
-        border-radius: 5px; /* 버튼 둥글게 만들기 위한 속성 */
-        cursor: pointer; /* 커서 모양 변경 */
-    }
+/* styles.css */
+.container {
+	border-radius: 10px;
+	margin-top: 20px;
+}
 
-    .centered-buttons button:hover {
-        background-color: #FF0000; /* 마우스 호버 시 배경색 변경 */
-    }
-        
-        
-        
-    </style>   
-    
-    
-    
-    
+.product-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.left {
+	margin-top: 100px;
+	margin-left: 100px;
+	background-color: white;
+}
+
+.right {
+	margin-top: 170px;
+	margin-left: 20px;
+	padding: 10px 40px;
+	background-color: white; /* 둥근 모서리를 가진 하얀색 배경 */
+	border-radius: 10px; /* 둥근 모서리 반경 설정 */
+}
+
+.product-info img {
+	max-width: 100%;
+	max-height: 500px;
+	margin-right: 20px;
+}
+
+.quantity-section {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.quantity-section button {
+	margin-left: 10px;
+}
+
+.centered-buttons {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.centered-buttons button {
+	padding: 10px 20px;
+	margin: 10px;
+	font-size: 16px;
+	background-color: #103E3F;
+	color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.centered-buttons button:hover {
+	background-color: #FF0000;
+}
+
+.description-text, .quantity-button {
+	font-size: 16px;
+}
+
+.quantity-button {
+	margin: 0 5px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.quantity-button:hover {
+	background-color: #2980b9;
+}
+
+.quantity-button.minus {
+	background-color: #2ecc71;
+}
+
+.quantity-button.minus:hover {
+	background-color: #27ae60;
+}
+
+.quantity-button.plus {
+	background-color: #e74c3c;
+}
+
+.quantity-button.plus:hover {
+	background-color: #c0392b;
+}
+
+.quantity-show {
+	font-size: 16px;
+}
+
+
+
+/* 장바구니와 주문하기 버튼 스타일 */
+.cart-button, .checkout-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: #ffffff; /* 흰색 배경색 */
+    color: #000000; /* 흰색 텍스트 색상 */
+    border: none;
+    border-radius: 10px; /* 둥근 끝 설정 */
+    cursor: pointer;
+}
+
+.cart-button:hover, .checkout-button:hover {
+    background-color: #2ecc71; /* 진한 초록색 */
+}
+
+
+</style>
+
+
+
+
 </head>
 <body>
 
-    <jsp:include page="../frame/menu.jsp" />
-    
-    <div class="container">
-        <div class="row">
-            <%
-                Connection connection = null;
-                PreparedStatement pstmt = null;
-                ResultSet resultSet = null;
+	<jsp:include page="../frame/menu.jsp" />
 
-                try {
-                    connection = getConnection();
+	<div class="container">
+		<div class="row">
+			<%
+			Connection connection = null;
+			PreparedStatement pstmt = null;
+			ResultSet resultSet = null;
 
-                    // 동적 SQL 쿼리
-                    String query = "SELECT pidx, pname, price, descriptor, image ,flag FROM products WHERE pidx = ?";
-                    pstmt = connection.prepareStatement(query);
-                    pstmt.setString(1, pidx);
-                    System.out.println("실행된 쿼리: " + pstmt.toString());
-                    resultSet = pstmt.executeQuery();
+			try {
+				connection = getConnection();
 
-                    // 하나의 제품을 예상하므로 루프는 필요하지 않음
-                    if (resultSet.next()) {
-                        int productId = resultSet.getInt("pidx");
-                        String pname = resultSet.getString("pname");
-                        int price = resultSet.getInt("price");
-                        String descriptor = resultSet.getString("descriptor");
-                        String image = resultSet.getString("image");
-                        int flag = resultSet.getInt("flag");
-                        int quantity = 1; // 실제 수량 값으로 대체 가능
-                        
-                        String flag1=null;
-                        String flag2=null;
-                        String flag3=null;
-                        
-                        
-                        
-                        
-                     // flag 값이 0이 아닌 경우에만 flag1, flag2, flag3 값을 가져오기
-                        if (flag != 0) {
-                        	
-                            String flagQuery = "SELECT flag1, flag2, flag3 FROM flag WHERE pidx = ?";
-                            try (PreparedStatement flagPstmt = connection.prepareStatement(flagQuery)) {
-                                flagPstmt.setInt(1, productId);
-                                ResultSet flagResultSet = flagPstmt.executeQuery();
+				// 동적 SQL 쿼리
+				String query = "SELECT pidx, pname, price, descriptor, image ,flag FROM products WHERE pidx = ?";
+				pstmt = connection.prepareStatement(query);
+				pstmt.setString(1, pidx);
+				System.out.println("실행된 쿼리: " + pstmt.toString());
+				resultSet = pstmt.executeQuery();
 
-                                if (flagResultSet.next()) {
-                                   flag1 = flagResultSet.getString("flag1");
-                                     flag2 = flagResultSet.getString("flag2");
-                                    flag3 = flagResultSet.getString("flag3");
+				// 하나의 제품을 예상하므로 루프는 필요하지 않음
+				if (resultSet.next()) {
+					int productId = resultSet.getInt("pidx");
+					String pname = resultSet.getString("pname");
+					int price = resultSet.getInt("price");
+					String descriptor = resultSet.getString("descriptor");
+					String image = resultSet.getString("image");
+					int flag = resultSet.getInt("flag");
+					int quantity = 1; // 실제 수량 값으로 대체 가능
 
-                                    // flag1, flag2, flag3 값을 사용하여 화면에 출력하거나 다른 작업 수행
-                                   
-                                }
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        
-                        
-                        
-                        
-                        
-                        
-            %>
+					String flag1 = null;
+					String flag2 = null;
+					String flag3 = null;
+
+					// flag 값이 0이 아닌 경우에만 flag1, flag2, flag3 값을 가져오기
+					if (flag != 0) {
+
+				String flagQuery = "SELECT flag1, flag2, flag3 FROM flag WHERE pidx = ?";
+				try (PreparedStatement flagPstmt = connection.prepareStatement(flagQuery)) {
+					flagPstmt.setInt(1, productId);
+					ResultSet flagResultSet = flagPstmt.executeQuery();
+
+					if (flagResultSet.next()) {
+						flag1 = flagResultSet.getString("flag1");
+						flag2 = flagResultSet.getString("flag2");
+						flag3 = flagResultSet.getString("flag3");
+
+						// flag1, flag2, flag3 값을 사용하여 화면에 출력하거나 다른 작업 수행
+
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+					}
+			%>
 
 
 
-            <!-- Product Information Section -->
-           <div class="col-md-7 left">
-           	
-               
-                
-                    <img src="../../resources/images/<%=image%>" alt="<%=pname%>" class="img-fluid">
-                
-                
-               
-                </div>
-                
-                
-                
-<div class="col-md-4 right"style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-				
-						<h3><%=pname%></h3>
-						<p>
-							가격:	<%=price%>원
-						</p>
-						
-						
-<!-- Display options only if flag values are available -->
-<%
-if (flag1 != null && flag2 != null && flag3 != null) {
-%>
-    <div class="options-section">
-        <p>옵션:</p>
-        <label>
-            <input type="radio" name="option" value="<%=flag1%>" checked>
-            <span><%=flag1%></span>
-        </label>
-        <label>
-            <input type="radio" name="option" value="<%=flag2%>">
-            <span><%=flag2%></span>
-        </label>
-        <label>
-            <input type="radio" name="option" value="<%=flag3%>">
-            <span><%=flag3%></span>
-        </label>
-    </div>
-<%
-}
-%>
+			<!-- Product Information Section -->
+			<div class="col-md-5 left">
 
-						
-						
-						
-						
 
-						<!-- Display the quantity and buttons horizontally -->
-						<div class="quantity-section">
-							<p>
-								수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span>
-							</p>
-							<!-- Quantity adjustment buttons -->
-							<button onclick="updateQuantity('-', <%=price%>)">-</button>
-							<button onclick="updateQuantity('+', <%=price%>)">+</button>
-						</div>
 
-						<!-- Display the order amount -->
-						<div class="order-amount-section">
-							<p>
-								주문금액: <span id="orderAmount"><%=price * quantity%>원</span>
-							</p>
-						</div>
+				<img src="../../resources/images/<%=image%>" alt="<%=pname%>"
+					class="img-fluid">
 
-<div ="row">
-						<!-- Cart and Order buttons -->
-						<button
-							onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니
-							담기</button>
-			
-			
-			
-						<button
-							onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
-</div>
-				
-			     
-           </div>     
-            
-         
-            <div class="col-md-12 product-info centered-buttons">
-             <!-- 상세보기와 리뷰 버튼 -->
-    <button onclick="showDetailSection()">상세보기</button>
-    <button onclick="showReviewSection(<%=pidx%>)">리뷰</button>
-            
-            
-            </div>
-           
 
-</div>
+
+			</div>
+
+
+
+			<div class="col-md-4 right"
+				style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+				<h3><%=pname%></h3>
+				<p>
+					가격:
+					<%=price%>원
+				</p>
+
+
+				<!-- Display options only if flag values are available -->
+				<%
+				if (flag1 != null && flag2 != null && flag3 != null) {
+				%>
+				<div class="options-section">
+					<p>옵션</p>
+					<label> <input type="radio" name="option"
+						value="<%=flag1%>" checked> <span><%=flag1%></span>
+					</label> <label> <input type="radio" name="option"
+						value="<%=flag2%>"> <span><%=flag2%></span>
+					</label> <label> <input type="radio" name="option"
+						value="<%=flag3%>"> <span><%=flag3%></span>
+					</label>
+				</div>
+				<%
+				}
+				%>
+
+
+
+
+
+
+				<!-- Display the quantity and buttons horizontally -->
+				<div class="quantity-section">
+					<p class="quantity-show">
+						수량: <span id="quantityDisplay" data-quantity="<%=quantity%>"><%=quantity%></span>
+					</p>
+					<!-- Quantity adjustment buttons -->
+					<button class="quantity-button minus"
+						onclick="updateQuantity('-', <%=price%>)">-</button>
+					<button class="quantity-button plus"
+						onclick="updateQuantity('+', <%=price%>)">+</button>
+				</div>
+
+				<!-- Display the order amount -->
+				<div class="order-amount-section">
+					<p>
+						주문금액: <span id="orderAmount"><%=price * quantity%>원</span>
+					</p>
+				</div>
+
+				<div="row">
+					<!-- Cart and Order buttons -->
+
+					<button class="cart-button"
+						onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니
+						담기</button>
+
+					<button class="checkout-button"
+						onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+
+				</div>
+
+
+			</div>
+
+
+			<div class="col-md-12 product-info centered-buttons">
+				<!-- 상세보기와 리뷰 버튼 -->
+				<button onclick="showDetailSection()">상세보기</button>
+				<button onclick="showReviewSection(<%=pidx%>)">리뷰</button>
+
+
+			</div>
+
+
+		</div>
 
 
 
@@ -258,37 +306,47 @@ if (flag1 != null && flag2 != null && flag3 != null) {
 
 
 
-             <!-- 상세보기 섹션 -->
-    <div class="col-md-12 detail-section" id="detailSection">
-        <!-- 상세보기 내용 -->
-        <p>설명: <%=descriptor%></p>
-    </div>
-
-             <!-- 리뷰 섹션 -->
-    <div class="col-md-12 review-section" id="reviewSection" style="display: none;">
-        <!-- 리뷰 내용 -->
-       
-    </div>
-    
-    
-
-            <%
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    // 리소스 해제
-                    if (resultSet != null) resultSet.close();
-                    if (pstmt != null) pstmt.close();
-                    if (connection != null) connection.close();
-                }
-            %>
-        </div>
-    </div>
-    
 
 
-    <jsp:include page="../frame/footer.jsp" />
+		<!-- 상세보기 섹션 -->
+
+		<div class="col-md-12 detail-section text-center" id="detailSection">
+			<!-- 상세보기 내용 -->
+			<p class="description-text">
+				🎁<%=descriptor%>🎁
+			</p>
+		</div>
+
+		<!-- 리뷰 섹션 -->
+		<div class="col-md-12 review-section text-center" id="reviewSection"
+			style="display: none; max-width: 600px; margin: 0 auto;">
+			<!-- 리뷰 내용 -->
+		</div>
+
+
+	</div>
+
+
+
+	<%
+	}
+	} catch (SQLException e) {
+	e.printStackTrace();
+	} finally {
+	// 리소스 해제
+	if (resultSet != null)
+	resultSet.close();
+	if (pstmt != null)
+	pstmt.close();
+	if (connection != null)
+	connection.close();
+	}
+	%>
+
+
+
+
+	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
 <script>

@@ -12,22 +12,19 @@
 <body>
 <style>
     .category-container {
-        background-color: white;
+        
         border-radius: 10px; /* 적절한 값으로 조절하세요 */
-        padding: 10px; /* 내용과의 간격을 조절하세요 */
+        padding: 0px; /* 내용과의 간격을 조절하세요 */
         text-align: left; /* 전체 텍스트를 왼쪽 정렬로 설정 */
     }
 
-    h4 {
-        font-size: 24px; /* 원하는 크기로 조절하세요 */
-        text-align: center; /* 카테고리 텍스트를 가운데 정렬로 설정 */
-    }
 
     ul {
         text-align: left; /* 리스트 텍스트를 왼쪽 정렬로 설정 */
     }
 
     ul li {
+    padding: 0px;
         list-style: none; /* 리스트 마커를 제거하여 왼쪽 정렬을 유지 */
          text-align: left;
     }
@@ -39,32 +36,32 @@
 </style>
 
 <div class="category-container">
-    <h4>카테고리</h4>
+    
 
     <ul>
         <li>
-            크리스마스
+            🔻크리스마스
             <ul>
-                <li><a href="categoryDetail.jsp?categoryDetail=트리">트리</a></li>
+                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=트리">트리</a></li>
                 <li><a href="categoryDetail.jsp?categoryDetail=오너먼트">오너먼트</a></li>
             </ul>
         </li>
         <li>
-            파티용품
+            🔻파티용품
             <ul>
                 <li><a href="categoryDetail.jsp?categoryDetail=코스튬">코스튬</a></li>
                 <li><a href="categoryDetail.jsp?categoryDetail=파티용품">파티용품</a></li>
             </ul>
         </li>
         <li>
-            의류
+            🔻의류
             <ul>
                 <li><a href="categoryDetail.jsp?categoryDetail=옷">옷</a></li>
                 <li><a href="categoryDetail.jsp?categoryDetail=잡화">잡화</a></li>
             </ul>
         </li>
         <li>
-            기타
+            🔻기타
             <ul>
                 <li><a href="categoryDetail.jsp?categoryDetail=포장">포장</a></li>
                 <li><a href="categoryDetail.jsp?categoryDetail=소품">소품</a></li>
