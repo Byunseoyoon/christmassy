@@ -34,6 +34,7 @@ String pidx = request.getParameter("pidx");
     overflow: hidden;
     border: 1px solid #d3d3d3;
     margin-top: 20px; /* 상단 여백 추가 */
+    background-color: white;
 }
      	
   th, td {
