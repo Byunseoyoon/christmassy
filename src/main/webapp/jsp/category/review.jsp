@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.InitialContext" %>
@@ -26,6 +27,27 @@ String pidx = request.getParameter("pidx");
 }
     
     
+     table {
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 10px; /* 둥글게 만들기 */
+    overflow: hidden;
+    border: 1px solid #d3d3d3;
+    margin-top: 20px; /* 상단 여백 추가 */
+}
+     	
+  th, td {
+    border-bottom: 1px solid #d3d3d3;
+    padding: 15px;
+    text-align: center;
+    color: #115A5B;
+}
+
+th {
+    background-color: #115A5B;
+    color: white;
+}
+    
     
     
     </style>
@@ -34,6 +56,12 @@ String pidx = request.getParameter("pidx");
 </head>
 <body>
 
+<table>
+ <tr>
+      <th>별점</th>
+      <th>코멘트</th>
+     
+    </tr>
 
 
    
@@ -54,20 +82,45 @@ String pidx = request.getParameter("pidx");
             resultSet = pstmt.executeQuery();
     %>
 
-<div class="container">
+
    
         <%
             while (resultSet.next()) {
                 int star = resultSet.getInt("star");
                 String comment = resultSet.getString("comment");
         %>
-<div class="row">
-        <div class="product-container">
-            <span class="rating">평점: <%=star%></span>
-            <span class="comment">코멘트: <%=comment%></span>
-        </div>
-        </div>
-        </div>
+<tr>
+   
+<td class="rating">
+            <% 
+            switch (star) {
+                case 1:
+                    out.print("🎅🏻");
+                    break;
+                case 2:
+                    out.print("🎅🏻🎅🏻");
+                    break;
+                case 3:
+                    out.print("🎅🏻🎅🏻🎅🏻");
+                    break;
+                case 4:
+                    out.print("🎅🏻🎅🏻🎅🏻🎅🏻");
+                    break;
+                case 5:
+                    out.print("🎅🏻🎅🏻🎅🏻🎅🏻🎅🏻");
+                    break;
+                default:
+                    // 예외 처리 등을 원하는 대로 추가할 수 있습니다.
+                    break;
+            }
+            %>
+        </td>
+        
+        
+        
+        
+            <td class="comment"> <%=comment%></td>
+    </tr>  
 
         <%
             }
@@ -81,9 +134,9 @@ String pidx = request.getParameter("pidx");
         }
         %>
     
-</div>
+
+</table>
 
 
 </body>
 </html>
-
