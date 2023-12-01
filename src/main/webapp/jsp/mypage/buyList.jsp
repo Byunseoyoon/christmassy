@@ -2,39 +2,27 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Product"%>
 <%@ page import="dao.ProductRepository"%>
-<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.*" %>
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="../../resources/css/myPage.css"> <!-- Include the CSS file -->
 <%
-String cartId = session.getId();
-Connection conn = null;
-PreparedStatement pstmt = null;
-ResultSet rs = null;
-Integer mIdx = null;
-
-// 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
-String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
-String user = "root";
-String password = "1234";
+	String cartId = session.getId();
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	Integer mIdx = null;
+	
+	// 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
+	String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
+	String user = "root";
+	String password = "1234";
 %>
 </head>
-<style>
-
-/* cart 부분 버튼 */
-.btn-buy {
-	background-color: #194F35;
-	border-color: #194F35;
-	color: white;
-}
-
- 
-</style>
-<jsp:include page="../frame/menu.jsp" />
-<jsp:include page="../frame/myPageMenu.jsp" />
-
-<body>
+	<body>
+		<jsp:include page="../frame/menu.jsp" />
+		<jsp:include page="../frame/myPageMenu.jsp" />
 	<%
 	try {
 		// JDBC 드라이버 로딩 (MySQL 드라이버)
@@ -45,11 +33,11 @@ String password = "1234";
 
 		// 세션에서 userId 가져오기
 		session = request.getSession();
-		String loggedInUserId = (String) session.getAttribute("userMidx");
+		String loggedInUserId = (String) session.getAttribute("userMidx"); 
 
 		// SQL 쿼리 (MySQL 쿼리)
 		mIdx = Integer.parseInt(loggedInUserId);
-		String sql = "SELECT * FROM cart c JOIN members m ON c.midx=m.midx JOIN products p ON p.pidx=c.pidx WHERE m.midx = ?";
+		String sql = "SELECT * FROM buy b JOIN members m ON b.midx=m.midx JOIN products p ON p.pidx=b.pidx WHERE b.midx = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, mIdx);
 
@@ -60,18 +48,17 @@ String password = "1234";
 	%>
 	<div class="main-box">
 		<div class="mypage-container">
-			<div class="box-title">장바구니</div>
+			<div class="box-title">구매목록</div>
 
 			<div class="row"></div>
 			<div style="padding-top: 50px">
 				<table class="table table-hover">
-					<thead class="tr-title">
+					<tr class="tr-title">
 						<th>상품</th>
 						<th>가격</th>
 						<th>수량</th>
 						<th>소계</th>
-						<th>삭제</th>
-					</thead>
+					</tr>
 					<%
 						while (rs.next()) {
 							int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
@@ -82,7 +69,6 @@ String password = "1234";
 						<td style="vertical-align : middle;"><%=rs.getString("price")%></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
 						<td style="vertical-align : middle;"><%=total%></td>
-						<td style="vertical-align : middle;"><a href="./removeCart.jsp?pidx=<%=rs.getString("pidx")%>" class="badge badge-danger">삭제</a></td>
 					</tr>
 					<%
 						}
@@ -95,18 +81,13 @@ String password = "1234";
 						<th></th>
 					</tr>
 				</table>
-				</td> <a href="./shippingInfo.jsp?cartId=<%=cartId%>"
-					class="btn btn-buy" style="float: right;">주문하기</a>
-				</td>
-				<div>
-					<a href="../category/categoryDetail.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
-				</div>
-			</div>
-			<hr>
+			<a href="./products.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
 		</div>
+		<hr>
+	</div>
+	
 
-
-		<%
+<%
 		} catch (Exception e) {
 		e.printStackTrace();
 		} finally {
@@ -129,8 +110,8 @@ String password = "1234";
 		}
 		%>
 	</div>
-	</div>
-
+</div>
+	
 	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>

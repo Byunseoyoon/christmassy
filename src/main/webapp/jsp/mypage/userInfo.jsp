@@ -24,7 +24,7 @@
 img {
 	width: 150px;
 	height: 150px;
-	overfit: cover;
+	overfit: contain;
 	margin-bottom: 50px;
 }
 </style>
