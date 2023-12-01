@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.net.URLDecoder"%>
 <%@ page import="java.sql.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -112,9 +113,9 @@
 					%>
 					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>
-						<td style="vertical-align : middle;"><%=rs.getString("price")%></td>
+						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
-						<td style="vertical-align : middle;"><%=total%></td>
+						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
 					</tr>
 					<%
 						}
@@ -123,7 +124,7 @@
 						<td> </td>
 						<td> </td>
 						<td class="text-right">	<strong>총액: </strong></td>
-						<td class="text-center text-danger"><strong><%=sum%> </strong></td>
+						<td class="text-center text-danger"><strong><fmt:formatNumber type="currency" value='<%=sum%>' /> </strong></td>
 					</tr>
 				</table>
 				<div class="text-center ">

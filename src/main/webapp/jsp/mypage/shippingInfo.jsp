@@ -70,9 +70,9 @@
 						<td style="vertical-align: middle; font-weight: bolder;"><img
 							class="td-image"
 							src="../../resources/images/<%=rs.getString("image")%>"> <%=rs.getString("pname")%></td>
-						<td style="vertical-align: middle;"><%=rs.getString("price")%></td>
+						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align: middle;"><%=rs.getString("number")%></td>
-						<td style="vertical-align: middle;"><%=total%></td>
+						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
 						<td style="vertical-align: middle;"><a
 							href="./removeCart.jsp?pidx=<%=rs.getString("pidx")%>"
 							class="badge badge-danger">삭제</a></td>
@@ -84,7 +84,7 @@
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th><%=sum%></th>
+						<th><fmt:formatNumber type="currency" value='<%=sum%>' /></th>
 						<th></th>
 					</tr>
 				</table>

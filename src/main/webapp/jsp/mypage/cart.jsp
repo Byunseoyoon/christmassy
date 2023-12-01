@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="dto.Product"%>
-<%@ page import="dao.ProductRepository"%>
 <%@ page import="java.sql.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
@@ -76,9 +74,9 @@ String password = "1234";
 					%>
 					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>
-						<td style="vertical-align : middle;"><%=rs.getString("price")%></td>
+						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
-						<td style="vertical-align : middle;"><%=total%></td>
+						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
 						<td style="vertical-align : middle;"><a href="./removeCart.jsp?pidx=<%=rs.getString("pidx")%>" class="badge badge-danger">삭제</a></td>
 					</tr>
 					<%
@@ -88,7 +86,7 @@ String password = "1234";
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th><%=sum%></th>
+						<th><fmt:formatNumber type="currency" value='<%=sum%>' /></th>
 						<th></th>
 					</tr>
 				</table>
