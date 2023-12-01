@@ -15,11 +15,6 @@
 		  text-align: center;
 		}
 		/* 노멀라이즈 끝 */
-		/* 2차 이상의 메뉴를 숨기기 */
-		.side-bar > ul ul {
-		  display: none;
-		}
-		
 		/* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
 		body {
 		  height: 5000px;
@@ -32,6 +27,7 @@
 		}
 		
 		.side-bar {
+		  display:flex;
 		  position: fixed;    /* 스크롤을 따라오도록 지정 */
 		  background-color: inherit;
 		  border-style: solid;
@@ -53,7 +49,8 @@
 		  font-weight: bold;
 		  padding-top: 20px;
 		  padding-bottom: 20px;
-		  padding-left: 50px;
+		  padding-left: 59px; 
+		  padding-right: 55px;
 		  text-align: center;
 		}
 		
@@ -69,11 +66,17 @@
 		  border-bottom: 1px solid #999;
 		  color:white;
 		} 
+		.selected{
+			font-weight: bolder;
+		}
 		
 
     </style>
 </head>
 <body>
+	<%
+	
+	%>
 	<aside class="side-bar">
 	  	<section class="side-bar__icon-box">
 		    <section class="side-bar__icon-1">
@@ -83,10 +86,10 @@
 	  	
 	  	<ul>
 		    <li>
-		      <a href="#" style=" background-color: #194F35; color:white;"> 마이페이지</a>
+		      <a href="#" style=" background-color: #194F35; color:white;" > 마이페이지</a>
 		    </li>
 		    <li>
-		      <a href="../mypage/userInfo.jsp">회원정보</a>
+		      <a href="../mypage/userInfo.jsp" <% if ("/userInfo.jsp".equals(request.getServletPath())) { %>class="selected"<% } %> >회원정보</a>
 		    </li>
 		    <li>
 		      <a href="../mypage/cart.jsp">장바구니</a>

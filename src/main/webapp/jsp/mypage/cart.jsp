@@ -8,7 +8,6 @@
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="../../resources/css/myPage.css"> <!-- Include the CSS file -->
 <%
-String cartId = session.getId();
 Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
@@ -22,14 +21,7 @@ String password = "1234";
 </head>
 <style>
 
-/* cart 부분 버튼 */
-.btn-buy {
-	background-color: #194F35;
-	border-color: #194F35;
-	color: white;
-}
 
- 
 </style>
 <jsp:include page="../frame/menu.jsp" />
 <jsp:include page="../frame/myPageMenu.jsp" />
@@ -47,6 +39,11 @@ String password = "1234";
 		session = request.getSession();
 		String loggedInUserId = (String) session.getAttribute("userMidx");
 
+		if(loggedInUserId==null){
+			response.sendRedirect("../main/login.jsp");
+		}
+
+		
 		// SQL 쿼리 (MySQL 쿼리)
 		mIdx = Integer.parseInt(loggedInUserId);
 		String sql = "SELECT * FROM cart c JOIN members m ON c.midx=m.midx JOIN products p ON p.pidx=c.pidx WHERE m.midx = ?";
@@ -95,8 +92,8 @@ String password = "1234";
 						<th></th>
 					</tr>
 				</table>
-				</td> <a href="./shippingInfo.jsp?cartId=<%=cartId%>"
-					class="btn btn-buy" style="float: right;">주문하기</a>
+				</td> 
+					<a href="./shippingInfo.jsp" class="btn btn-buy" style="float: right;">주문하기</a>
 				</td>
 				<div>
 					<a href="../category/categoryDetail.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
@@ -129,8 +126,6 @@ String password = "1234";
 		}
 		%>
 	</div>
-	</div>
-
 	<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>

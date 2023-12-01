@@ -35,6 +35,11 @@
 		session = request.getSession();
 		String loggedInUserId = (String) session.getAttribute("userMidx"); 
 
+		if(loggedInUserId==null){
+			response.sendRedirect("../main/login.jsp");
+		}
+
+		
 		// SQL 쿼리 (MySQL 쿼리)
 		mIdx = Integer.parseInt(loggedInUserId);
 		String sql = "SELECT * FROM buy b JOIN members m ON b.midx=m.midx JOIN products p ON p.pidx=b.pidx WHERE b.midx = ?";
@@ -81,7 +86,7 @@
 						<th></th>
 					</tr>
 				</table>
-			<a href="./products.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
+			<a href="../category/categoryDetail.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
 		</div>
 		<hr>
 	</div>
