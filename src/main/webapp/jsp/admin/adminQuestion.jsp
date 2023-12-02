@@ -76,12 +76,12 @@
 		<h1>Q&A</h1>
   </div>
   <br>
-  <table>
-    <tr>
+  <table class="table-hover">
+    <thread>
       <th class="center">id</th>
       <th class="center">제목</th>
       <th class="center">일시</th>
-    </tr>
+    </thread>
 <%
    Connection conn = null;
    Statement stmt = null;
@@ -109,9 +109,9 @@
 	     while (rs.next()) {
 
 	   %>
-	   <tr>
+	   <tr onClick="location.href='writeAnswer.jsp?help.q_num=<%= rs.getInt("help.q_num") %>'" style="cursor:pointer;">
 	   <td class="center"><%= rs.getString("members.id") %></td>
-	   <td class="left"><a href="writeAnswer.jsp?help.q_num=<%= rs.getInt("help.q_num") %>"><%= rs.getString("help.title") %></a></td>
+	   <td class="left"><%= rs.getString("help.title") %></td>
 	   <td class="center"><%= rs.getString("help.content_date") %></td>
 	   </tr>
 	   <%
