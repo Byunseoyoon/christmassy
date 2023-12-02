@@ -20,13 +20,13 @@
 
 		// 세션에서 userId 가져오기
 		session = request.getSession();
-		
-		String spIdx = request.getParameter("pidx");
-		Integer pIdx = Integer.parseInt(spIdx); 
+
+		String spidx = request.getParameter("pidx");
+		Integer pidx = Integer.parseInt(spidx); 
 		// SQL 쿼리 (MySQL 쿼리)
 		String sql = "DELETE FROM products WHERE pidx = ?";
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, pIdx);
+		pstmt.setInt(1, pidx);
 
 		// 쿼리 실행
 		pstmt.executeUpdate();

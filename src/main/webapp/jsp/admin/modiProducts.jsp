@@ -206,9 +206,10 @@
 						%>
 					</div>
 				</div>
-			</div>
-			<div class="btn">
-				<button type="submit" class="gradient">수정하기</button>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-buy">수정하기</button>
+					<a href="adminProducts.jsp"  style="color:rgba(25, 79, 53, 0.75); background-color:white;" class="btn" >목록가기</a>
+				</div>
 			</div>
 		</form>
 		<%

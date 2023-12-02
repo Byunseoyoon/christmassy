@@ -61,15 +61,17 @@ String password = "1234";
 						<th>가격</th>
 						<th>수정</th>
 						<th>삭제</th>
+						<th>사이트</th>
 					</thead>
 					<%
 						while (rs.next()) {
 					%>
-					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
+					<tr onClick="location.href='./modiProducts.jsp?pidx=<%=rs.getString("pidx")%>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>
 						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
-						<td style="vertical-align : middle;"><a href="./modiProducts.jsp?pidx=<%=rs.getString("pidx")%>" class="badge badge-success">수정</a></td>
-						<td style="vertical-align : middle;"><a href="./removeProducts.jsp?pidx=<%=rs.getString("pidx")%>" class="badge badge-danger">삭제</a></td>
+						<td style="vertical-align : middle;"><a href="./modiProducts.jsp?pidx=<%=rs.getString("pidx")%>" class="button button-success">수정</a></td>
+						<td style="vertical-align : middle;"><a href="./removeProducts.jsp?pidx=<%=rs.getString("pidx")%>" class="button button-danger">삭제</a></td>
+						<td style="vertical-align : middle;"><a href="../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>" class="button">보러가기</a></td>
 					</tr>
 					<%
 						}
