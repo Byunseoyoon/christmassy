@@ -76,7 +76,7 @@
 			form.id.focus();
 			return false;
 		}
-		window.open("checkDuplicateId.jsp", "CheckDuplicateIdResult", "width=400, height=200");
+		window.open("checkDuplicateId.jsp", "CheckDuplicateIdResult", "width=400, height=300");
 	}
 	
 	function checkRegister() {
