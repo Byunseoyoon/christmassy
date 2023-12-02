@@ -78,6 +78,12 @@
         margin-right: 5px;
         font-weight: bold;
     }
+    .line {
+      width: 1400px;
+      height: 1px;
+      background-color: #ccc; /* 연한 회색으로 지정 (#ccc는 회색을 나타내는 색상 코드입니다.) */
+      margin: 80px 80px;
+    }
     .category-section {
     	text-align: center;
         max-width: 1200px;
@@ -166,12 +172,14 @@
 	        <%-- 초기 로딩 시 상품이 여기에 나타납니다. --%>
 	    </div>
 	</div>
+	
+	<div class="line"></div>
     
     <div class="category-section">
 	    <h2 class="mb-4 text-center">Categories</h2>
 	    <div class="row">
 	        <div class="col-md-6 text-center mb-4">
-		        <a href="#">
+		        <a href="../category/categoryDetail.jsp?category=크리스마스&categoryDetail=트리">
 		            <img src="../../resources/images/tree1.png" width="300" height="300">
 		        </a>
 		        <div class="box-text">
@@ -180,7 +188,7 @@
 		    </div>
 
 	        <div class="col-md-6 text-center mb-4">
-	            <a href="#">
+	            <a href="../category/categoryDetail.jsp?categoryDetail=코스튬">
 		            <img src="../../resources/images/tree2.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
@@ -190,7 +198,7 @@
 	    </div>
 	    <div class="row">
 	        <div class="col-md-6 text-center mb-4">
-			    <a href="#">
+			    <a href="../category/categoryDetail.jsp?categoryDetail=옷">
 		            <img src="../../resources/images/tree3.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
@@ -198,7 +206,7 @@
 			    </div>
 	        </div>
 	        <div class="col-md-6 text-center mb-4">
-	            <a href="#">
+	            <a href="../category/categoryDetail.jsp?categoryDetail=포장">
 		            <img src="../../resources/images/tree4.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
