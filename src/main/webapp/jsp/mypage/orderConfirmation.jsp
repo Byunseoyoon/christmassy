@@ -50,6 +50,7 @@
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
+
 <link rel="stylesheet" type="text/css" href="../../resources/css/myPage.css"> <!-- Include the CSS file -->
 </head>
 <body>
