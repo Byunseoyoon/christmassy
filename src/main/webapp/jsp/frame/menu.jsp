@@ -59,12 +59,12 @@
 					            if (userId != null) {
 					                // 로그인된 상태라면 로그아웃 버튼 표시
 					        %>
-					                <a class="nav-link" href="logout.jsp">Logout</a>
+					                <a class="nav-link" href="../main/logout.jsp">Logout</a>
 					        <%
 					            } else {
 					                // 로그인되지 않은 상태라면 로그인 버튼 표시
 					        %>
-					                <a class="nav-link" href="login.jsp">Log in</a>
+					                <a class="nav-link" href="../main/login.jsp">Log in</a>
 					        <%
 					            }
 					        %>
