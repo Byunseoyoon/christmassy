@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../admin/adminMembers.jsp">customer</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../admin/adminProducts.jsp">products</a>
+                    </li>
                 </ul>
             </div>
         </div>
