@@ -61,6 +61,7 @@
 						<th>가격</th>
 						<th>수량</th>
 						<th>소계</th>
+						<th>리뷰</th>
 					</thead>
 					<%
 						while (rs.next()) {
@@ -72,6 +73,7 @@
 						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
 						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
+						<td style="vertical-align : middle;"><%=rs.getString("review")%></td>
 					</tr>
 					<%
 						}

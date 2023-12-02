@@ -77,12 +77,12 @@
 		<h1>Q&A</h1>
 	</div>
   <br>
-  <table>
-    <tr>
+  <table class="table-hover">
+    <thead>
       <th class="center">번호</th>
       <th  class="center">제목</th>
       <th class="center">일시</th>
-    </tr>
+    </thead>
 <%
    Connection conn = null;
    Statement stmt = null;
@@ -125,9 +125,9 @@
               // 결과 처리
               while (rsQnA.next()) {
 %>
-                <tr>
+                <tr onClick="location.href='viewQuestion.jsp?q_num=<%= rsQnA.getInt("q_num") %>'" style="cursor:pointer;">
   			<td class="center"><%= rsQnA.getString("hidx") %></td>
-  			<td class="left"><a href="viewQuestion.jsp?q_num=<%= rsQnA.getInt("q_num") %>"><%= rsQnA.getString("title") %></a></td>
+  			<td class="left"><%= rsQnA.getString("title") %></td>
   			<td class="center"><%= rsQnA.getString("content_date") %></td>
 		</tr>
 <%

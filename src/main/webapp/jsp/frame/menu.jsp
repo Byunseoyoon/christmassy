@@ -43,7 +43,7 @@
                         <a class="nav-link" href="../main/home.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
+                        <a class="nav-link" href="../category/categoryDetail.jsp">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../customerservice/serviceMain.jsp">Help</a>
