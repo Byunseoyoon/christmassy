@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
 <style>
-  a {
+  .sa {
     color: #115A5B;
     text-decoration: none;
   }
@@ -75,10 +75,10 @@
 		</details>
 	</div>
 	<div class="QAA">
-		<a href="question.jsp"><h3>Q&A</h3></a>
+		<a class="sa" href="question.jsp"><h3>Q&A</h3></a>
 	</div>
 	<div class="term">
-		<a href="terms.jsp"><h3>이용 약관</h3></a>
+		<a class="sa" href="terms.jsp"><h3>이용 약관</h3></a>
 	</div>
 	<jsp:include page="../frame/footer.jsp" />
 </body>

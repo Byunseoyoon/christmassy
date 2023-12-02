@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.InitialContext" %>
@@ -111,7 +111,16 @@ background-color: rgba(255, 255, 255, 0);
   <div class="container">
         <div class="row">
             <div class="col-md-12 text-center jumbo">
-                <h2 class="header-text"><%=category%> > <%=categoryDetail%></h2>
+                <h2 class="header-text">
+                	<c:choose> 
+						<c:when test="${categoryDetail==null}">
+							전체
+						</c:when> 
+						<c:otherwise>
+							<%=category%> > <%=categoryDetail%>
+						</c:otherwise> 
+					</c:choose> 
+                </h2>
             </div>
         </div>
         
@@ -129,16 +138,24 @@ background-color: rgba(255, 255, 255, 0);
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet resultSet = null;
+        String query = null;
 
         try {
             connection = getConnection();
 
-            // SQL 쿼리 동적 
-            String query = "SELECT pidx, pname, price, descriptor, image FROM products WHERE categoryDetail = ?";
-            pstmt = connection.prepareStatement(query);
-            pstmt.setString(1,categoryDetail);
-            System.out.println("실행된 쿼리: " + pstmt.toString());
-            resultSet = pstmt.executeQuery();
+            if(categoryDetail==null){
+            	query = "SELECT pidx, pname, price, descriptor, image FROM products";
+                pstmt = connection.prepareStatement(query);
+                System.out.println("실행된 쿼리: " + pstmt.toString());
+                resultSet = pstmt.executeQuery();
+            }else{
+	            // SQL 쿼리 동적 
+	            query = "SELECT pidx, pname, price, descriptor, image FROM products WHERE categoryDetail = ?";
+	            pstmt = connection.prepareStatement(query);
+	            pstmt.setString(1,categoryDetail);
+	            System.out.println("실행된 쿼리: " + pstmt.toString());
+	            resultSet = pstmt.executeQuery();
+            }
     %>
 
 
