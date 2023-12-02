@@ -15,7 +15,7 @@
     String category = request.getParameter("category");
 
     // SQL 쿼리 실행
-    String query = "SELECT pname, image FROM products WHERE category = ? LIMIT 3";
+    String query = "SELECT pidx, pname, image FROM products WHERE category = ? LIMIT 3";
     try (
     	
         PreparedStatement statement = conn.prepareStatement(query)) {
@@ -26,11 +26,14 @@
 
         // 결과 출력
         while(resultSet.next()) {
+        	String pidx = resultSet.getString("pidx");
             String image = resultSet.getString("image");
             String pname = resultSet.getString("pname");
 %>
             <div>
-                <img src="../../resources/images/<%= image %>" width="300" height="300" class="rounded-image">
+            	<a href="../category/productDetail.jsp?pidx= <%= pidx%>">
+                	<img src="../../resources/images/<%= image %>" width="300" height="300" class="rounded-image">
+                </a>
                 <p><%= pname %> </p>
             </div>
 <%
