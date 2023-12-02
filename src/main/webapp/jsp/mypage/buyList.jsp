@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="java.sql.*" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -67,13 +68,24 @@
 						while (rs.next()) {
 							int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
 							sum = sum + total; 
+							Integer review= Integer.parseInt(rs.getString("review"));
 					%>
 					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>
 						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
 						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
-						<td style="vertical-align : middle;"><%=rs.getString("review")%></td>
+						<td style="vertical-align : middle;">
+							<c:choose> 
+								<c:when test="${review == '0'}">
+									리뷰 작성하기
+								</c:when> 
+								<c:otherwise>
+									리뷰 작성완료
+								</c:otherwise> 
+							</c:choose> 
+						
+						</td>
 					</tr>
 					<%
 						}
