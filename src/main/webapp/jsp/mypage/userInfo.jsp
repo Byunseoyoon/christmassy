@@ -21,7 +21,7 @@
 
 
 /*  */
-img {
+.img-1 {
 	width: 150px;
 	height: 150px;
 	overfit: contain;
@@ -68,7 +68,7 @@ img {
 		<div class="mypage-container">
 			<div class="box-title">회원정보</div>
 			<div class="box-title">
-				<img src="../../resources/images/profile.png" alt="profile">
+				<img class="img-1" src="../../resources/images/profile.png" alt="profile">
 			</div>
 			<div class="box">
 				<div class=" box-item">
