@@ -15,11 +15,6 @@
 		  text-align: center;
 		}
 		/* 노멀라이즈 끝 */
-		/* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
-		body {
-		  height: 5000px;
-		}
-		
 		/* 사이드바의 너비와 높이를 변수를 통해 통제 */
 		:root {
 		  --side-bar-width: 200px;
