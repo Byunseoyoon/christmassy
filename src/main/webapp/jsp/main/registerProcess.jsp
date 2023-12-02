@@ -40,7 +40,7 @@
 		pstmt.setString(6, contentDate);
 		
 		pstmt.executeUpdate();
-		response.sendRedirect("home.jsp");
+		response.sendRedirect("login.jsp");
 		
 	} catch(SQLException e){
 		e.printStackTrace(); 
