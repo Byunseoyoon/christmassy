@@ -22,7 +22,7 @@
 
   Enumeration files = multi.getFileNames();
   String fname = (String) files.nextElement();
-  String fileName = multi.getFilesystemName(fname);
+  String fileName = multi.getOriginalFileName(fname);
 
   String title = multi.getParameter("title");
   String contents = multi.getParameter("contents");
