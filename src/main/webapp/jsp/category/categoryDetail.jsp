@@ -112,14 +112,27 @@ background-color: rgba(255, 255, 255, 0);
         <div class="row">
             <div class="col-md-12 text-center jumbo">
                 <h2 class="header-text">
-                	<c:choose> 
-						<c:when test="${categoryDetail==null}">
-							전체
-						</c:when> 
-						<c:otherwise>
-							<%=category%> > <%=categoryDetail%>
-						</c:otherwise> 
-					</c:choose> 
+                
+                
+                
+                 <%
+					            if (category != null) {
+					                // 로그인된 상태라면 로그아웃 버튼 표시
+					        %>
+					               <%=category%> > <%=categoryDetail%>
+					        <%
+					            } else {
+					                // 로그인되지 않은 상태라면 로그인 버튼 표시
+					        %>
+					               전체
+					        <%
+					            }
+					        %>
+                
+                
+                
+                
+                	
                 </h2>
             </div>
         </div>
