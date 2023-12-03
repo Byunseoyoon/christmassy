@@ -359,11 +359,8 @@ function addToCart(productId, productName, unitPrice) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
 
- 
     // 선택된 옵션 가져오기
-    var optionElement = document.querySelector('input[name="option"]:checked');
-  var option = optionElement ? optionElement.value : null;
-
+    var option = document.querySelector('input[name="option"]:checked').value;
 
     // 상품 정보 및 선택된 옵션을 alert로 표시
     var message =  productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.\n선택된 옵션: " + option;
@@ -423,16 +420,11 @@ function redirectToCheckout(productId) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
 
-
-    
     // 선택된 옵션 가져오기
-    var optionElement = document.querySelector('input[name="option"]:checked');
-  var option = optionElement ? optionElement.value : null;
-  
-  
+    var selectedOption = document.querySelector('input[name="option"]:checked').value;
 
     // 주문 페이지로 이동하면서 상품 pidx, 수량, 옵션 정보를 전달
-    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + option;
+    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + selectedOption;
 }
 
 
@@ -498,9 +490,3 @@ window.onload = function() {
 
  
 </script>
-
-
-
-
-
-

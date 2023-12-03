@@ -223,7 +223,7 @@ String pidx = request.getParameter("pidx");
          <div class="col-md-4 right"
             style="display: flex; flex-direction: column; align-items: center; text-align: center;">
 
-            <h3><%=pname%></h3>
+            <h4><%=pname%></h4>
             <p>
                가격:
                <%=price%>원
@@ -359,10 +359,10 @@ function addToCart(productId, productName, unitPrice) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
 
- 
     // 선택된 옵션 가져오기
-    var optionElement = document.querySelector('input[name="option"]:checked');
-  var option = optionElement ? optionElement.value : null;
+   
+   var optionElement = document.querySelector('input[name="option"]:checked');
+var option = optionElement ? optionElement.value : null;
 
 
     // 상품 정보 및 선택된 옵션을 alert로 표시
@@ -370,26 +370,26 @@ function addToCart(productId, productName, unitPrice) {
     alert(message);
     
     
-    
+
     
  // 데이터를 전송할 값을 설정
     var productId2 = productId;
-    var quantity2 = quantity;
+   var quantity2 = quantity;
     var option2 = option;
 
-    // 동적으로 form 엘리먼트 생성
+    동적으로 form 엘리먼트 생성
     var form = document.createElement('form');
     form.action = 'addToCart.jsp';
     form.method = 'post';
 
-    // hidden input 엘리먼트 생성 후 form에 추가
+     hidden input 엘리먼트 생성 후 form에 추가
     var productIdInput = document.createElement('input');
     productIdInput.type = 'hidden';
     productIdInput.name = 'productId';
     productIdInput.value = productId2;
     form.appendChild(productIdInput);
 
-    var quantityInput = document.createElement('input');
+   var quantityInput = document.createElement('input');
     quantityInput.type = 'hidden';
     quantityInput.name = 'quantity';
     quantityInput.value = quantity2;
@@ -423,13 +423,9 @@ function redirectToCheckout(productId) {
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
 
-
-    
     // 선택된 옵션 가져오기
-    var optionElement = document.querySelector('input[name="option"]:checked');
-  var option = optionElement ? optionElement.value : null;
-  
-  
+  var optionElement = document.querySelector('input[name="option"]:checked');
+var option = optionElement ? optionElement.value : null;
 
     // 주문 페이지로 이동하면서 상품 pidx, 수량, 옵션 정보를 전달
     window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + option;
@@ -498,9 +494,3 @@ window.onload = function() {
 
  
 </script>
-
-
-
-
-
-
