@@ -188,7 +188,7 @@
 		            <img src="../../resources/images/tree1.png" width="300" height="300">
 		        </a>
 		        <div class="box-text">
-			        <h3>Christmass</h3>
+			        <h3>Christmas</h3>
 			    </div>
 		    </div>
 
