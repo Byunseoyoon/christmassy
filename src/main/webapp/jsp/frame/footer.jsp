@@ -47,6 +47,7 @@
     text-decoration: none;
     display: block;
     margin-bottom: 5px;
+    text-align: right;
   }
   .title_footer {
     color: #E3D5C8;
