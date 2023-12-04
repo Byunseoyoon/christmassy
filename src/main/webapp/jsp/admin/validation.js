@@ -1,8 +1,10 @@
 function CheckAddProduct() {
 	
-	var name = document.getElementById("name");
-	var unitPrice = document.getElementById("unitPrice");
-	var unitsInStock = document.getElementById("unitsInStock");
+	var name = document.getElementById("pname");
+	var unitPrice = document.getElementById("price");
+	var unitsInStock = document.getElementById("stock");
+	var category = document.getElementById("category");
+	var categoryDetail = document.getElementById("categoryDetail");
 	
 	
 	//상품명 체크
@@ -10,6 +12,20 @@ function CheckAddProduct() {
 		alert("[상품명]\n최소 4자에서 최대 12자까지 입력하세요");
 		name.select();
 		name.focus();
+		return false;
+	}
+	//카테고리 체크
+	if (category.value.length==0) {
+		alert("[카테고리]\n카테고리명을 입력하세요");
+		category.select();
+		category.focus();
+		return false;
+	}
+	//카테고리 명 체크
+	if (categoryDetail.value.length==0) {
+		alert("[상세카테고리]\n상세 카테고리 명을 입력하세요");
+		categoryDetail.select();
+		categoryDetail.focus();
 		return false;
 	}
 	//상품 가격 체크

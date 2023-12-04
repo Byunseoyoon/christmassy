@@ -83,5 +83,8 @@
 			}
 		}
 			
-	response.sendRedirect("buyList.jsp");
 %>
+<script>
+alert("리뷰 작성완료!");
+location.href = 'buyList.jsp';
+</script>

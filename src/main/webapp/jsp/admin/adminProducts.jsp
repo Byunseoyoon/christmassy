@@ -48,8 +48,7 @@ String password = "1234";
 		
 	%>
 			<div class="box-title">상품</div>
-
-			<div class="row"></div>
+			<div style="margin-left:30px;" onClick="location.href='addProducts.jsp'" type="submit" class="btn btn-buy">추가하기</div>
 			<div style="padding-top: 50px">
 				<table class="table table-hover">
 					<thead class="tr-title">
