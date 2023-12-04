@@ -11,26 +11,22 @@
 
 
 <%
-    // URL 파라미터에서 값을 읽어옴
-    String pidx = request.getParameter("pidx");
-    String quantity = request.getParameter("quantity");
-    String option = request.getParameter("option");
-%>
+        // URL 파라미터에서 값을 읽어옴
+        String pidx = request.getParameter("pidx");
+        String quantity = request.getParameter("quantity");
+        String option = request.getParameter("option");
+    %>
+
 
 
 
 </head>
 <body>
-
-
-
 	<%
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	Integer mIdx = null;
-	
-	
 
 	// 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
 	String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
@@ -50,27 +46,18 @@
 			// 세션에서 userId 가져오기
 			session = request.getSession();
 			String loggedInUserId = (String) session.getAttribute("userMidx");
-			
-			
-			
-	           // 동적 SQL 쿼리
-            String query = "SELECT pidx, pname, price, descriptor, image ,flag FROM products WHERE pidx = ?";
-            pstmt = connection.prepareStatement(query);
-            pstmt.setString(1, pidx);
-            System.out.println("실행된 쿼리: " + pstmt.toString());
-            resultSet = pstmt.executeQuery();
 
 			// SQL 쿼리 (MySQL 쿼리)
 			mIdx = Integer.parseInt(loggedInUserId);
-			 // SQL 쿼리 (MySQL 쿼리)
-	        String sql = "SELECT pname, price, image FROM products WHERE  pidx= ?";
-	        
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, mIdx);
+			
+			 String query = "SELECT pidx, pname, price, image, number FROM products WHERE pidx = ?";
+             pstmt = conn.prepareStatement(query);
+             pstmt.setInt(1, Integer.parseInt(pidx));
 
-			// 쿼리 실행
-			rs = pstmt.executeQuery();
-			//int sum = 0;
+             // 쿼리 실행
+             rs = pstmt.executeQuery();
+             
+			int sum = 0;
 			
 		%>
 		<div class="box-title" style="margin-top: 50px">주문하기</div>
@@ -87,23 +74,23 @@
 						<th>소계</th>
 						<th>삭제</th>
 					</thead>
-					<%int total=0;
+					<%
 					while (rs.next()) {
-						total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
-						
+						int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
+						sum = sum + total;
 					%>
-			<tr onClick="location.href='../category/productDetail.jsp?pidx=<%= pidx %>'">
-    <td style="vertical-align: middle; font-weight: bolder;">
-        <img class="td-image" src="../../resources/images/<%= rs.getString("image") %>">
-        <%= rs.getString("pname") %>
-    </td>
-    <td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%= rs.getString("price") %>' /></td>
-    <td style="vertical-align: middle;"><%= quantity %></td>
-    <td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%= Integer.parseInt(rs.getString("price")) * Integer.parseInt(quantity) %>' /></td>
-    <td style="vertical-align: middle;">
-        <a href="./removeCart.jsp?pidx=<%= rs.getString("pidx") %>" class="badge badge-danger">삭제</a>
-    </td>
-</tr>
+					<tr
+						onClick="location.href='productDetail.jsp?pidx=<%=rs.getString("pidx")%>'">
+						<td style="vertical-align: middle; font-weight: bolder;"><img
+							class="td-image"
+							src="../../resources/images/<%=rs.getString("image")%>"> <%=rs.getString("pname")%></td>
+						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
+						<td style="vertical-align: middle;"><%=quantity %></td>
+						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
+						<td style="vertical-align: middle;"><a
+							href="./removeCart.jsp?pidx=<%=rs.getString("pidx")%>"
+							class="badge badge-danger">삭제</a></td>
+					</tr>
 					<%
 					}
 					%>
@@ -111,7 +98,7 @@
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th><fmt:formatNumber type="currency" value='<%=total%>' /></th>
+						<th><fmt:formatNumber type="currency" value='<%=sum%>' /></th>
 						<th></th>
 					</tr>
 				</table>
@@ -125,7 +112,7 @@
 			<div class="form-container" >
 				<form action="./processShippingInfo.jsp" class="form-horizontal" method="post">
 				<%
-					sql = "SELECT * FROM members WHERE midx = ?";
+					String sql = "SELECT * FROM members WHERE midx = ?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, mIdx);
 

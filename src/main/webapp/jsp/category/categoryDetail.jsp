@@ -29,15 +29,18 @@ String categoryDetail = request.getParameter("categoryDetail");
     margin: 1%;
     float: left;
     margin-bottom: 20px; /* Adjust the spacing as needed */ 
+    margin-left : 40px;
       display: flex;
     flex-direction: column;
     align-items: center;
+       cusor: pointer;
    
 }
 
 .product-container img {
     width: 200px;
     height: 200px;
+  
 }
 
 
@@ -186,9 +189,9 @@ background-color: rgba(255, 255, 255, 0);
 
 <div class="col-3 product-container" onclick="redirectToProductDetail('<%=pidx%>')">
     <img src="../../resources/images/<%=image%>" class="product-image" />
-    <h4 class="product-name"><%=pname%></h4>
+    <h8 class="product-name"><%=pname%></h8>
     <p class="product-price">가격: <%=price%>원</p>
-    <p class="product-description"><%=descriptor%></p>
+
 </div>
 
    
