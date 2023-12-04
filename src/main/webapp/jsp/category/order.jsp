@@ -1,204 +1,75 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="java.sql.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.util.ArrayList"%>
-<html>
-<head>
-<jsp:include page="../frame/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="../../resources/css/myPage.css">
-<!-- Include the CSS file -->
+<%@ page import="java.sql.*" %>
 
+
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="connect.jsp" %>
 
 <%
-        // URL 파라미터에서 값을 읽어옴
-        String pidx = request.getParameter("pidx");
-        String quantity = request.getParameter("quantity");
-        String option = request.getParameter("option");
-    %>
+    String pidx = request.getParameter("productId");
+    String quantity = request.getParameter("quantity");
+    String option = request.getParameter("option");
+    
+    
+ // Retrieve midx from the session
+ String userMidx = (String) session.getAttribute("userMidx");
+
+ // Check if the attribute exists before using it
+ if (userMidx == null) {
+     // Use the userMidx as needed
+	 System.out.println("User Midx not found in the session");
+	  response.sendRedirect("../main/login.jsp");
+ } else {
+	 
+	 System.out.println("User Midx: " + userMidx);
+     
+ }
 
 
+    
+    
+    
 
+    Connection connection = null;
+    PreparedStatement pstmt = null;
 
-</head>
-<body>
-	<%
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	Integer mIdx = null;
+    try {
+        connection = getConnection();
 
-	// 데이터베이스 연결 정보 설정 (MySQL 연결 정보)
-	String url = "jdbc:mysql://localhost:3306/christmassyDB?useSSL=false&serverTimezone=UTC";
-	String user = "root";
-	String password = "1234";
-	%>
-	<jsp:include page="../frame/menu.jsp" />
-	<div class="main-box">
-		<%
-		try {
-			// JDBC 드라이버 로딩 (MySQL 드라이버)
-			Class.forName("com.mysql.cj.jdbc.Driver");
+        // 받아온 값 콘솔에 출력
+        System.out.println("Received productId: " + pidx);
+        System.out.println("Received quantity: " + quantity);
+        System.out.println("Received option: " + option);
 
-			// 데이터베이스 연결
-			conn = DriverManager.getConnection(url, user, password);
+        // PreparedStatement를 사용하여 SQL 인젝션을 방지
+        String insertQuery = "INSERT INTO Cart (midx, pidx, number, flag) VALUES (?, ?, ?, ?)";
+        pstmt = connection.prepareStatement(insertQuery);
 
-			// 세션에서 userId 가져오기
-			session = request.getSession();
-			String loggedInUserId = (String) session.getAttribute("userMidx");
+        // 데이터베이스 테이블의 pidx와 number 컬럼이 int 형이므로 setInt()를 사용
+        pstmt.setInt(1, Integer.parseInt(userMidx));
+        pstmt.setInt(2, Integer.parseInt(pidx));
+        pstmt.setInt(3, Integer.parseInt(quantity));
+        pstmt.setString(4, option);
 
-			// SQL 쿼리 (MySQL 쿼리)
-			mIdx = Integer.parseInt(loggedInUserId);
-			
-			 String query = "SELECT pidx, pname, price, image, number FROM products WHERE pidx = ?";
-             pstmt = conn.prepareStatement(query);
-             pstmt.setInt(1, Integer.parseInt(pidx));
+        pstmt.executeUpdate();
+        
+      
 
-             // 쿼리 실행
-             rs = pstmt.executeQuery();
-             
-			int sum = 0;
-			
-		%>
-		<div class="box-title" style="margin-top: 50px">주문하기</div>
-		<div class="mypage-container" style="margin-right: 260px">
-			<div class="box-title">상품</div>
+        response.sendRedirect("../mypage/cart.jsp?");
+    } catch (Exception e) {
+        e.printStackTrace();
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    } finally {
+        // 리소스 해제
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+%>
 
-			<div class="row"></div>
-			<div style="padding-top: 50px">
-				<table class="table table-hover">
-					<thead class="tr-title">
-						<th>상품</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>소계</th>
-						<th>삭제</th>
-					</thead>
-					<%
-					while (rs.next()) {
-						int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
-						sum = sum + total;
-					%>
-					<tr
-						onClick="location.href='productDetail.jsp?pidx=<%=rs.getString("pidx")%>'">
-						<td style="vertical-align: middle; font-weight: bolder;"><img
-							class="td-image"
-							src="../../resources/images/<%=rs.getString("image")%>"> <%=rs.getString("pname")%></td>
-						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
-						<td style="vertical-align: middle;"><%=quantity %></td>
-						<td style="vertical-align: middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
-						<td style="vertical-align: middle;"><a
-							href="./removeCart.jsp?pidx=<%=rs.getString("pidx")%>"
-							class="badge badge-danger">삭제</a></td>
-					</tr>
-					<%
-					}
-					%>
-					<tr>
-						<th></th>
-						<th></th>
-						<th>총액</th>
-						<th><fmt:formatNumber type="currency" value='<%=sum%>' /></th>
-						<th></th>
-					</tr>
-				</table>
-			</div>
-			<hr>
-
-
-		</div>
-		<div class="mypage-container" style="margin-right: 260px">
-			<div class="box-title">배송정보</div>
-			<div class="form-container" >
-				<form action="./processShippingInfo.jsp" class="form-horizontal" method="post">
-				<%
-					String sql = "SELECT * FROM members WHERE midx = ?";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, mIdx);
-
-					// 쿼리 실행
-					rs = pstmt.executeQuery();
-					if(rs.next()){
-						
-					}else{
-						out.println("데이터가 없습니다.");
-					}
-				%>
-					<%-- <input type="hidden" name="cartId" value="<%=rs.getString("midx")%>" /> --%>
-					<div class="form-group row">
-						<label class="col-sm-2">성명</label>
-						<div class="col-sm-3">
-							<input name="name" type="text" class="form-item" value="<%=rs.getString("name")%>" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2">전화번호</label>
-						<div class="col-sm-3">
-							<input name="phone" type="text" class="form-item" value="<%=rs.getString("phone")%>" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2">배송일</label>
-						<div class="col-sm-3">
-							<c:set var="ymd" value="<%=new java.util.Date()%>" />
-							<input name="shippingDate" type="text" class="form-item" value="<fmt:formatDate value="${ymd}" pattern="yyyy-MM-dd" />" readonly/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2">국가</label>
-						<div class="col-sm-3">
-							<input name="country" type="text" class="form-item" value="Korea"/>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2">우편번호</label>
-						<div class="col-sm-3">
-							<input name="zipCode" type="text" class="form-item" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-sm-2">주소</label>
-						<div class="col-sm-5">
-							<input name="addressName" type="text" class="form-item" value="<%=rs.getString("address")%>" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-offset-2 col-sm-10 ">
-								<input type="submit" class="btn btn-buy float-right" value="주문하기" /> 
-								<a href="./checkOutCancelled.jsp" style="margin-right:5px;" class="btn btn-secondary float-right"	role="button"> 취소 </a>
-						</div>
-					</div>
-				</form>
-			</div>
-			
-		</div>
-
-		<%
-		} catch (Exception e) {
-		e.printStackTrace();
-		} finally {
-		// 자원 해제
-		if (rs != null)
-			try {
-				rs.close();
-			} catch (Exception e) {
-			}
-		if (pstmt != null)
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-			}
-		if (conn != null)
-			try {
-				conn.close();
-			} catch (Exception e) {
-			}
-		}
-		%>
-
-
-
-	</div>
-	<jsp:include page="../frame/footer.jsp" />
-</body>
-</html>

@@ -51,12 +51,19 @@ th {
     
     
 .rating {
-    min-width: 200px; /* 최소 너비를 원하는 값으로 조절하세요 */
+    min-width: 180px; /* 최소 너비를 원하는 값으로 조절하세요 */
     text-align: center; /* 별표시를 중앙 정렬합니다 */
 }
 
 .rating span {
     display: inline-block; /* 별표시를 가로로 나열합니다 */
+}
+
+
+.id{
+ min-width: 260px; /* 최소 너비를 원하는 값으로 조절하세요 */
+    text-align: center; /* 중앙 정렬합니다 */
+
 }
     
     

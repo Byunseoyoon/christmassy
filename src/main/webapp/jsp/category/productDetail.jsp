@@ -338,7 +338,7 @@ margin-top :15px;}
                   담기</button>
 
                <button class="checkout-button"
-                  onclick="redirectToCheckout(<%=productId%>, <%=quantity%>)">주문하기</button>
+                  onclick="redirectToCheckout(<%=productId%>,'<%=pname%>', <%=price%>, <%=quantity%>)">주문하기</button>
 
             </div>
 
@@ -376,7 +376,7 @@ margin-top :15px;}
 
       <!-- 리뷰 섹션 -->
       <div class="col-md-12 review-section text-center" id="reviewSection"
-         style="display: none; max-width: 800px; margin: 0 auto;">
+         style="display: none; max-width: 1000px; margin: 0 auto;">
          <!-- 리뷰 내용 -->
       </div>
 
@@ -477,20 +477,59 @@ function addToCart(productId, productName, unitPrice) {
 
 
 // 주문 버튼 클릭 시 처리하는 함수
-function redirectToCheckout(productId) {
+function redirectToCheckout(productId, productName, unitPrice) {
+
+
+
     // 현재 수량 가져오기
     var quantity = parseInt(document.getElementById("quantityDisplay").getAttribute("data-quantity"));
 
-
-    
+ 
     // 선택된 옵션 가져오기
     var optionElement = document.querySelector('input[name="option"]:checked');
   var option = optionElement ? optionElement.value : null;
-  
-  
 
-    // 주문 페이지로 이동하면서 상품 pidx, 수량, 옵션 정보를 전달
-    window.location.href = "order.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + option;
+
+   
+    
+    
+    
+    
+ // 데이터를 전송할 값을 설정
+    var productId2 = productId;
+    var quantity2 = quantity;
+    var option2 = option;
+
+    // 동적으로 form 엘리먼트 생성
+    var form = document.createElement('form');
+    form.action = 'order.jsp';
+    form.method = 'post';
+
+    // hidden input 엘리먼트 생성 후 form에 추가
+    var productIdInput = document.createElement('input');
+    productIdInput.type = 'hidden';
+    productIdInput.name = 'productId';
+    productIdInput.value = productId2;
+    form.appendChild(productIdInput);
+
+    var quantityInput = document.createElement('input');
+    quantityInput.type = 'hidden';
+    quantityInput.name = 'quantity';
+    quantityInput.value = quantity2;
+    form.appendChild(quantityInput);
+
+    var optionInput = document.createElement('input');
+    optionInput.type = 'hidden';
+    optionInput.name = 'option';
+    optionInput.value = option2;
+    form.appendChild(optionInput);
+
+    // form을 body에 추가하고 submit
+    document.body.appendChild(form);
+    form.submit();
+
+    
+    
 }
 
 
