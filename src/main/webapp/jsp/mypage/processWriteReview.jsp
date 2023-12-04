@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="java.sql.*"%>
 <%
+
+	request.setCharacterEncoding("utf-8");
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	PreparedStatement pstmt2 = null;
@@ -53,6 +55,7 @@
 		pstmt2.setInt(1, bidx);
 		
 		pstmt2.executeUpdate();
+		request.setAttribute("msg", "리뷰작성이 완료되었습니다.");
 		
 	} catch (Exception e) {
 		e.printStackTrace();
