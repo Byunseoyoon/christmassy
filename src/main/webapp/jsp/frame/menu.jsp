@@ -85,7 +85,7 @@
 		            <a href="../customerservice/serviceMain.jsp">Help</a>
 		            <div class="dropdown-content">
 		            	<a href="../customerservice/writeQuestion.jsp">문의하기</a>
-		            	<a href="../customerservice/viewQuestion.jsp">문의목록</a>
+		            	<a href="../customerservice/question.jsp">문의목록</a>
 		                <a href="../customerservice/serviceMain.jsp">FAQ</a>
 		                <a href="../customerservice/terms.jsp">이용약관</a>
 		            </div>
