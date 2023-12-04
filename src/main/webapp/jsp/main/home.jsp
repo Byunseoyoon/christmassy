@@ -86,13 +86,34 @@
     }
     .category-section {
     	text-align: center;
-        max-width: 1200px;
+        max-width: 900px;
         margin: 0 auto; /* 가운데 정렬을 위한 스타일 */
+    }
+    .category-section img {
+    	border-radius: 20px;
+    	box-shadow: 0 4px 8px rrgba(17, 90, 91, 0.5) /* 그림자 효과 추가 */
     }
     .product {
         display: flex;
         justify-content: space-around;
     }	
+    .category-section .box-text {
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    text-align: center;
+	    width: 100%;
+	    color: #fff; /* 텍스트 색상 설정 */
+	}
+	
+	.category-section .box-text h3 {
+	    font-size: 50px;
+	    margin: 0;
+	    -webkit-text-stroke: 1px #115A5B; /* 크로스 브라우징을 위해 -webkit- 접두어 사용 */
+	    text-stroke: 1px #115A5B;
+	    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+	}
 
 </style>
 
@@ -167,34 +188,34 @@
 		            <img src="../../resources/images/tree1.png" width="300" height="300">
 		        </a>
 		        <div class="box-text">
-			        <h3>크리스마스</h3>
+			        <h3>Christmas</h3>
 			    </div>
 		    </div>
 
 	        <div class="col-md-6 text-center mb-4">
-	            <a href="../category/categoryDetail.jsp?categoryDetail=코스튬">
-		            <img src="../../resources/images/tree2.png" width="300" height="300">
+	            <a href="../category/categoryDetail.jsp?category=파티용품&categoryDetail=코스튬">
+		            <img src="../../resources/images/main_party.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
-			        <h3>파티 용품</h3>
+			        <h3>Party</h3>
 			    </div>
 	        </div>
 	    </div>
 	    <div class="row">
 	        <div class="col-md-6 text-center mb-4">
-			    <a href="../category/categoryDetail.jsp?categoryDetail=옷">
-		            <img src="../../resources/images/tree3.png" width="300" height="300">
+			    <a href="../category/categoryDetail.jsp?category=의류&categoryDetail=옷">
+		            <img src="../../resources/images/main_cloth.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
-			        <h3>의류</h3>
+			        <h3>Cloth</h3>
 			    </div>
 	        </div>
 	        <div class="col-md-6 text-center mb-4">
-	            <a href="../category/categoryDetail.jsp?categoryDetail=포장">
-		            <img src="../../resources/images/tree4.png" width="300" height="300">
+	            <a href="../category/categoryDetail.jsp?category=기타&categoryDetail=포장">
+		            <img src="../../resources/images/main_acc.png" width="300" height="300">
 		        </a>
 			    <div class="box-text">
-			        <h3>기타</h3>
+			        <h3>Acc</h3>
 			    </div>
 	        </div>
 	    </div>
@@ -202,6 +223,5 @@
 
     
     <jsp:include page="../frame/footer.jsp" />
-    </div>
 </body>
 </html>
