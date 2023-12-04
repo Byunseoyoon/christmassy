@@ -68,6 +68,7 @@
 							int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
 							sum = sum + total; 
 							int review= rs.getInt("review");
+							String flag = rs.getString("flag");
 					%>
 					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>

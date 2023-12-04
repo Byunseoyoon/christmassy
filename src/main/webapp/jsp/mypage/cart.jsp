@@ -62,6 +62,7 @@ String password = "1234";
 				<table class="table table-hover">
 					<thead class="tr-title">
 						<th>상품</th>
+						<th>옵션</th>
 						<th>가격</th>
 						<th>수량</th>
 						<th>소계</th>
@@ -71,9 +72,15 @@ String password = "1234";
 						while (rs.next()) {
 							int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
 							sum = sum + total; 
+							String flag = rs.getString("flag");
 					%>
 					<tr onClick="location.href='../category/productDetail.jsp?pidx=<%=rs.getString("pidx") %>'">
 						<td style="vertical-align : middle; font-weight:bolder;"><img class="td-image" src="../../resources/images/<%=rs.getString("image")%>">   <%=rs.getString("pname")%></td>
+						<td style="vertical-align : middle; font-weight:bolder;">
+							<% if(flag ==null || flag.isEmpty()){ %>
+								X
+							<%}else{ out.print(flag);}%>
+						</td>
 						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=rs.getString("price")%>' /></td>
 						<td style="vertical-align : middle;"><%=rs.getString("number")%></td>
 						<td style="vertical-align : middle;"><fmt:formatNumber type="currency" value='<%=total%>' /></td>
