@@ -51,6 +51,7 @@ String password = "1234";
 		// 쿼리 실행
 		rs = pstmt.executeQuery();
 		int sum =0;
+		int ctotal =0;
 		
 	%>
 	<div class="main-box">
@@ -70,6 +71,7 @@ String password = "1234";
 					</thead>
 					<%
 						while (rs.next()) {
+							ctotal++;
 							int total = Integer.parseInt(rs.getString("price")) * Integer.parseInt(rs.getString("number"));
 							sum = sum + total; 
 							String flag = rs.getString("flag");
@@ -98,7 +100,10 @@ String password = "1234";
 					</tr>
 				</table>
 				</td> 
-					<a href="./shippingInfo.jsp" class="btn btn-buy" style="float: right;">주문하기</a>
+					<% if (ctotal!=0){ %>
+						<a href="./shippingInfo.jsp" class="btn btn-buy" style="float: right;">주문하기</a>
+					<%} %>
+					
 				</td>
 				<div>
 					<a href="../category/categoryDetail.jsp" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
