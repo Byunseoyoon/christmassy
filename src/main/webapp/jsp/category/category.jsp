@@ -49,22 +49,22 @@
         <li>
             🔻파티용품
             <ul>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=코스튬">코스튬</a></li>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=파티용품">파티용품</a></li>
+                <li><a href="categoryDetail.jsp?category=파티용품&categoryDetail=코스튬">코스튬</a></li>
+                <li><a href="categoryDetail.jsp?category=파티용품&categoryDetail=파티용품">파티용품</a></li>
             </ul>
         </li>
         <li>
             🔻의류
             <ul>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=옷">옷</a></li>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=잡화">잡화</a></li>
+                <li><a href="categoryDetail.jsp?category=의류&categoryDetail=옷">옷</a></li>
+                <li><a href="categoryDetail.jsp?category=의류&categoryDetail=잡화">잡화</a></li>
             </ul>
         </li>
         <li>
             🔻기타
             <ul>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=포장">포장</a></li>
-                <li><a href="categoryDetail.jsp?category=크리스마스&categoryDetail=소품">소품</a></li>
+                <li><a href="categoryDetail.jsp?category=기타&categoryDetail=포장">포장</a></li>
+                <li><a href="categoryDetail.jsp?category=기타&categoryDetail=소품">소품</a></li>
             </ul>
         </li>
     </ul>
