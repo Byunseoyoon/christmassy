@@ -22,10 +22,8 @@ String category = request.getParameter("category");
 String categoryDetail = request.getParameter("categoryDetail");
 String image = request.getParameter("image");
 String sstock = request.getParameter("stock");
-String sflag = request.getParameter("flag");
 
 Integer stock = Integer.parseInt(sstock);
-Integer flag = Integer.parseInt(sflag);
 
 Connection conn = null;
 PreparedStatement pstmt = null;
@@ -43,7 +41,7 @@ try {
 	// 데이터베이스 연결
 	conn = DriverManager.getConnection(url, user, password);
 
-	String updateQuery = "UPDATE products SET pname = ?, price = ?, descriptor = ?, category = ?, categoryDetail = ?, stock = ?, flag = ? WHERE pidx = ?";
+	String updateQuery = "UPDATE products SET pname = ?, price = ?, descriptor = ?, category = ?, categoryDetail = ?, stock = ? WHERE pidx = ?";
 	pstmt = conn.prepareStatement(updateQuery);
 	pstmt.setString(1, pname);
 	pstmt.setInt(2, price);
@@ -52,8 +50,7 @@ try {
 	pstmt.setString(5, categoryDetail);
 	/* pstmt.setString(6, image); */
 	pstmt.setInt(6, stock);
-	pstmt.setInt(7, flag);
-	pstmt.setInt(8, pidx);
+	pstmt.setInt(7, pidx);
 	pstmt.executeUpdate();
 
 } catch (Exception e) {

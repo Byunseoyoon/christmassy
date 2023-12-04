@@ -147,7 +147,6 @@
 				String categoryDetail = rs.getString("categoryDetail");
 				String image = rs.getString("image");
 				String stock = rs.getString("stock");
-				String flag = rs.getString("flag");
 		%>
 		<form action="updateProduct.jsp" method="post">
 			<input name="pidx" type="hidden" class="form-item" value="<%=pidx%>" />
@@ -180,12 +179,6 @@
 					<label class="col-sm-2">stock</label>
 					<div class="col-sm-3">
 						<input name="stock" type="text" class="form-item" value="<%=stock%>" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-sm-2">flag</label>
-					<div class="col-sm-3">
-						<input name="flag" type="text" class="form-item" value="<%=flag%>" />
 					</div>
 				</div>
 				<div class="form-group row">

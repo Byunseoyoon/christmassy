@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <jsp:include page="../frame/header.jsp"></jsp:include>
@@ -81,6 +82,8 @@
       <th class="center">id</th>
       <th class="center">이름</th>
       <th class="center">전화번호</th>
+      <th class="center">주소</th>
+      <th class="center">가입날짜</th>
     </tr>
 <%
    Connection conn = null;
@@ -99,18 +102,22 @@
 	     // 데이터베이스 연결
 	     conn = DriverManager.getConnection(url, user, password);
 
-	     String sql = "SELECT id, name, phone " +
+	     String sql = "SELECT *" +
                  "FROM members ";
 	     stmt = conn.createStatement();
 	     rs = stmt.executeQuery(sql);
 
+	     Timestamp timestamp = null; 
 	     while (rs.next()) {
+	    	 timestamp = rs.getTimestamp("mdate");
 
 	   %>
 	   <tr>
 	   <td class="center"><%= rs.getString("id") %></td>
 	   <td class="left"><%= rs.getString("name") %></td>
 	   <td class="center"><%= rs.getString("phone") %></td>
+	   <td class="center"><%= rs.getString("address") %></td>
+	   <td class="center"><fmt:formatDate value="<%= timestamp %>" pattern="yyyy-MM-dd" /></td>
 	   </tr>
 	   <%
 	   }
