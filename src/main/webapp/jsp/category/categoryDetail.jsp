@@ -188,7 +188,7 @@ background-color: rgba(255, 255, 255, 0);
     <img src="../../resources/images/<%=image%>" class="product-image" />
     <h4 class="product-name"><%=pname%></h4>
     <p class="product-price">가격: <%=price%>원</p>
-    <p class="product-description">설명: <%=descriptor%></p>
+    <p class="product-description"><%=descriptor%></p>
 </div>
 
    

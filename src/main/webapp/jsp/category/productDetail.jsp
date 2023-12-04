@@ -23,6 +23,12 @@ String pidx = request.getParameter("pidx");
 
 <style>
 
+
+   .header-text {
+        color: black; /* 텍스트 색상을 검은색으로 설정 */
+        text-align: left;
+    }
+
 /* styles.css */
 .container {
    border-radius: 10px;
@@ -37,18 +43,41 @@ String pidx = request.getParameter("pidx");
 }
 
 .left {
-   margin-top: 100px;
+   margin-top: 50px;
    margin-left: 100px;
-   background-color: white;
+  
 }
 
 .right {
-   margin-top: 170px;
+   margin-top: 50px;
    margin-left: 20px;
    padding: 10px 40px;
    background-color: white; /* 둥근 모서리를 가진 하얀색 배경 */
    border-radius: 10px; /* 둥근 모서리 반경 설정 */
 }
+
+
+ .price-heading {
+        margin-top: 20px; /* 여백 크기를 조절할 수 있습니다. */
+        /* 다른 스타일을 추가할 수도 있습니다. */
+        font-size: 1.5em;
+        color: #333;
+        /* 필요한 다른 스타일을 추가하세요. */
+    }
+    
+   .option-head {
+      margin-top: 20px; /* 여백 크기를 조절할 수 있습니다. */
+      /* 다른 스타일을 추가할 수도 있습니다. */
+      font-size: 1em;
+      color: #333;
+      /* 필요한 다른 스타일을 추가하세요. */
+  }
+
+
+.quantity-show{
+
+margin-top :15px;}
+
 
 .product-info img {
    max-width: 100%;
@@ -151,8 +180,7 @@ String pidx = request.getParameter("pidx");
 
    <jsp:include page="../frame/menu.jsp" />
 
-   <div class="container">
-      <div class="row">
+  
          <%
          Connection connection = null;
          PreparedStatement pstmt = null;
@@ -162,7 +190,7 @@ String pidx = request.getParameter("pidx");
             connection = getConnection();
 
             // 동적 SQL 쿼리
-            String query = "SELECT pidx, pname, price, descriptor, image ,flag FROM products WHERE pidx = ?";
+            String query = "SELECT pidx, pname, price, descriptor,  category,categoryDetail, image ,flag FROM products WHERE pidx = ?";
             pstmt = connection.prepareStatement(query);
             pstmt.setString(1, pidx);
             System.out.println("실행된 쿼리: " + pstmt.toString());
@@ -174,6 +202,9 @@ String pidx = request.getParameter("pidx");
                String pname = resultSet.getString("pname");
                int price = resultSet.getInt("price");
                String descriptor = resultSet.getString("descriptor");
+               String category = resultSet.getString("category");
+               String categoryDetail = resultSet.getString("categoryDetail");
+               
                String image = resultSet.getString("image");
                int flag = resultSet.getInt("flag");
                int quantity = 1; // 실제 수량 값으로 대체 가능
@@ -205,7 +236,27 @@ String pidx = request.getParameter("pidx");
          %>
 
 
+<div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center jumbo">
+                <h2 class="header-text">
+           
+					               <%=category%> > <%=categoryDetail%>
+			
+                	
+                </h2>
+            </div>
+        </div>
+        </div>
+        
+            <hr class="custom-hr1"> <!-- custom-hr1 클래스를 적용하여 가로선 추가 -->
+         
 
+
+ 
+  <div class="container">
+      <div class="row">
+ 
          <!-- Product Information Section -->
          <div class="col-md-5 left">
 
@@ -223,11 +274,11 @@ String pidx = request.getParameter("pidx");
          <div class="col-md-4 right"
             style="display: flex; flex-direction: column; align-items: center; text-align: center;">
 
-            <h3><%=pname%></h3>
-            <p>
-               가격:
-               <%=price%>원
-            </p>
+            <h2><%=pname%></h2>
+            <h3 class="price-heading">
+    		가격:
+   			 <%=price%>원
+			</h3>
 
 
             <!-- Display options only if flag values are available -->
@@ -235,7 +286,7 @@ String pidx = request.getParameter("pidx");
             if (flag1 != null && flag2 != null && flag3 != null) {
             %>
             <div class="options-section">
-               <p>옵션</p>
+               <p class="option-head">옵션</p>
                <label> <input type="radio" name="option"
                   value="<%=flag1%>" checked> <span><%=flag1%></span>
                </label> <label> <input type="radio" name="option"
@@ -366,7 +417,7 @@ function addToCart(productId, productName, unitPrice) {
 
 
     // 상품 정보 및 선택된 옵션을 alert로 표시
-    var message =  productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.\n선택된 옵션: " + option;
+    var message =  productName + " 상품이 장바구니에 " + quantity + "개 담겼습니다.";
     alert(message);
     
     
@@ -432,7 +483,7 @@ function redirectToCheckout(productId) {
   
 
     // 주문 페이지로 이동하면서 상품 pidx, 수량, 옵션 정보를 전달
-    window.location.href = "testcart.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + option;
+    window.location.href = "order.jsp?pidx=" + productId + "&quantity=" + quantity + "&option=" + option;
 }
 
 
