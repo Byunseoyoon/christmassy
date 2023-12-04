@@ -43,13 +43,13 @@ String pidx = request.getParameter("pidx");
 }
 
 .left {
-   margin-top: 50px;
+   margin-top: 10px;
    margin-left: 100px;
   
 }
 
 .right {
-   margin-top: 50px;
+   margin-top: 10px;
    margin-left: 20px;
    padding: 10px 40px;
    background-color: white; /* 둥근 모서리를 가진 하얀색 배경 */
@@ -57,8 +57,14 @@ String pidx = request.getParameter("pidx");
 }
 
 
+
+.product-name{
+ margin-top: 30px;
+
+}
+
  .price-heading {
-        margin-top: 20px; /* 여백 크기를 조절할 수 있습니다. */
+        margin-top: 30px; /* 여백 크기를 조절할 수 있습니다. */
         /* 다른 스타일을 추가할 수도 있습니다. */
         font-size: 1.5em;
         color: #333;
@@ -83,6 +89,7 @@ margin-top :15px;}
    max-width: 100%;
    max-height: 500px;
    margin-right: 20px;
+  
 }
 
 .quantity-section {
@@ -274,7 +281,7 @@ margin-top :15px;}
          <div class="col-md-4 right"
             style="display: flex; flex-direction: column; align-items: center; text-align: center;">
 
-            <h2><%=pname%></h2>
+            <h2 class="product-name"><%=pname%></h2>
             <h3 class="price-heading">
     		가격:
    			 <%=price%>원
@@ -369,7 +376,7 @@ margin-top :15px;}
 
       <!-- 리뷰 섹션 -->
       <div class="col-md-12 review-section text-center" id="reviewSection"
-         style="display: none; max-width: 600px; margin: 0 auto;">
+         style="display: none; max-width: 800px; margin: 0 auto;">
          <!-- 리뷰 내용 -->
       </div>
 
