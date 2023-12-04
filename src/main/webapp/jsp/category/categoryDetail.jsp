@@ -187,7 +187,7 @@ background-color: rgba(255, 255, 255, 0);
                     String image = resultSet.getString("image");
             %>
 
-<div class="col-3 product-container" onclick="redirectToProductDetail('<%=pidx%>')">
+<div class="col-3 product-container" style="cursor:pointer;" onclick="redirectToProductDetail('<%=pidx%>')">
     <img src="../../resources/images/<%=image%>" class="product-image" />
     <h8 class="product-name"><%=pname%></h8>
     <p class="product-price">가격: <%=price%>원</p>
