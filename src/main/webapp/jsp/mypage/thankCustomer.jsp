@@ -37,6 +37,7 @@
 		<p><a href="../category/categoryDetail.jsp" class="btn btn-buy float-right" > &laquo; 상품 목록</a>		
 	</div>	
 		</div>
+		<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
 <%

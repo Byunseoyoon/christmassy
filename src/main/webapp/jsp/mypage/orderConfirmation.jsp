@@ -158,5 +158,6 @@
 			}
 		}
 		%>
+		<jsp:include page="../frame/footer.jsp" />
 </body>
 </html>
