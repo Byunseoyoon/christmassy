@@ -332,11 +332,14 @@ margin-top :15px;}
 
             <div="row">
                <!-- Cart and Order buttons -->
-
+				<% String loggedInUserId = (String) session.getAttribute("userMidx");
+					if(loggedInUserId!=null){ %>
                <button class="cart-button"
                   onclick="addToCart(<%=productId%>, '<%=pname%>', <%=price%>, <%=quantity%>)">장바구니
                   담기</button>
-
+				<%}else{ %>
+					<button class="cart-button" onClick="javascript:alert('로그인이 필요합니다.')" >장바구니 담기</button>
+				<%} %>
                <button class="checkout-button"
                   onclick="redirectToCheckout(<%=productId%>,'<%=pname%>', <%=price%>, <%=quantity%>)">주문하기</button>
 
