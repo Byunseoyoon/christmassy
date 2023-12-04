@@ -35,6 +35,10 @@
 			session = request.getSession();
 			String loggedInUserId = (String) session.getAttribute("userMidx");
 
+			if(loggedInUserId==null){
+				response.sendRedirect("../main/login.jsp");
+			}
+			
 			
 			// SQL 쿼리 (MySQL 쿼리)
 			String sbidx = request.getParameter("bidx");

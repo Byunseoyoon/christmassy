@@ -77,7 +77,7 @@
 						<td style="vertical-align : middle;">
 							
 							<% if(review==0){ %>
-								<a style="cursor:pointer;" href="writeReview.jsp?bidx=<%=rs.getString("bidx") %>">리뷰 작성하기</div>
+								<a style="cursor:pointer;" href="writeReview.jsp?bidx=<%=rs.getString("bidx") %>">리뷰 작성하기 >></div>
 							<%}else {%>
 								<div>리뷰 작성완료</div>
 								<%} %>
